@@ -1,1 +1,5 @@
 rootProject.name = 'collaborative-shopping-squad'
+include 'collaboshopping-app'
+include 'collaboshopping-api'
+include 'collaboshopping-batch'
+
