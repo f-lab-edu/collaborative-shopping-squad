@@ -1,114 +1,137 @@
-
-CREATE TABLE member (
-  id INT PRIMARY KEY AUTO_INCREMENT,
-  uuid BINARY(16),
-  email VARCHAR(150),
-  name VARCHAR(50),
-  pw_hash TEXT,
-  role VARCHAR(50),
-  created_at TIMESTAMP DEFAULT NOW(),
-  updated_at TIMESTAMP DEFAULT NOW()
+create table collaborative_shopping_squad.account
+(
+    id          int auto_increment
+        primary key,
+    member_id   int                                 null,
+    bank_id     int                                 null,
+    account_num int                                 null,
+    holder      varchar(50)                         null,
+    confirm_yn  varchar(1)                          null,
+    main_yn     varchar(1)                          null,
+    created_at  timestamp default CURRENT_TIMESTAMP null,
+    updated_at  timestamp default CURRENT_TIMESTAMP null
 );
 
-CREATE TABLE bank (
-  id INT PRIMARY KEY AUTO_INCREMENT,
-  code INT,
-  name VARCHAR(50),
-  created_at TIMESTAMP DEFAULT NOW(),
-  updated_at TIMESTAMP DEFAULT NOW()
+create table collaborative_shopping_squad.address
+(
+    id           int auto_increment
+        primary key,
+    member_id    int                                 null,
+    address_name text                                null,
+    address_type varchar(50)                         null,
+    sido         varchar(50)                         null,
+    sigungu      varchar(100)                        null,
+    sigungu_code varchar(50)                         null,
+    main_yn      varchar(1)                          null,
+    created_at   timestamp default CURRENT_TIMESTAMP null,
+    updated_at   timestamp default CURRENT_TIMESTAMP null
 );
 
-CREATE TABLE account (
-  id INT PRIMARY KEY AUTO_INCREMENT,
-  member_id INT,
-  bank_id INT,
-  account_num INT,
-  holder VARCHAR(50),
-  confirm_yn VARCHAR(1),
-  main_yn VARCHAR(1),
-  created_at TIMESTAMP DEFAULT NOW(),
-  updated_at TIMESTAMP DEFAULT NOW()
+create table collaborative_shopping_squad.bank
+(
+    id         int auto_increment
+        primary key,
+    code       int                                 null,
+    name       varchar(50)                         null,
+    created_at timestamp default CURRENT_TIMESTAMP null,
+    updated_at timestamp default CURRENT_TIMESTAMP null
 );
 
-CREATE TABLE address (
-  id INT PRIMARY KEY AUTO_INCREMENT,
-  member_id INT,
-  address_name TEXT, 
-  address_type VARCHAR(50),
-  sido VARCHAR(50), 
-  sigungu VARCHAR(100), 
-  sigungu_code VARCHAR(50), 
-  main_yn VARCHAR(1),
-  created_at TIMESTAMP DEFAULT NOW(),
-  updated_at TIMESTAMP DEFAULT NOW()
+create table collaborative_shopping_squad.collaborator
+(
+    id         int auto_increment
+        primary key,
+    member_id  int                                 null,
+    profit     int                                 null,
+    created_at timestamp default CURRENT_TIMESTAMP null,
+    updated_at timestamp default CURRENT_TIMESTAMP null
 );
 
-CREATE TABLE collaborator (
-  id INT PRIMARY KEY AUTO_INCREMENT,
-  member_id INT,
-  profit INT,
-  created_at TIMESTAMP DEFAULT NOW(),
-  updated_at TIMESTAMP DEFAULT NOW()
+create table collaborative_shopping_squad.like_hist
+(
+    id              int auto_increment
+        primary key,
+    member_id       int                                 null,
+    collaborator_id int                                 null,
+    score           int                                 null,
+    created_at      timestamp default CURRENT_TIMESTAMP null,
+    updated_at      timestamp default CURRENT_TIMESTAMP null
 );
 
-CREATE TABLE trade (
-  id INT PRIMARY KEY AUTO_INCREMENT,
-  register_id INT,
-  collaborator_id INT,
-  name VARCHAR(200),
-  content TEXT,
-  per_price INT,
-  min_purchase_count INT,
-  state VARCHAR(50),
-  origin_url TEXT,
-  created_at TIMESTAMP DEFAULT NOW(),
-  updated_at TIMESTAMP DEFAULT NOW()
+create table collaborative_shopping_squad.member
+(
+    id         int auto_increment
+        primary key,
+    uuid       binary(16)                          null,
+    email      varchar(150)                        null,
+    name       varchar(50)                         null,
+    pw_hash    text                                null,
+    role       varchar(50)                         null,
+    created_at timestamp default CURRENT_TIMESTAMP null,
+    updated_at timestamp default CURRENT_TIMESTAMP null
 );
 
-CREATE TABLE trade_detail (
-  id INT PRIMARY KEY AUTO_INCREMENT,
-  trade_id INT,
-  member_id INT,
-  purchase_count INT,
-  created_at TIMESTAMP DEFAULT NOW(),
-  updated_at TIMESTAMP DEFAULT NOW()
+create table collaborative_shopping_squad.point
+(
+    member_id   int                                 not null
+        primary key,
+    total_point int                                 null,
+    created_at  timestamp default CURRENT_TIMESTAMP null,
+    updated_at  timestamp default CURRENT_TIMESTAMP null
 );
 
-CREATE TABLE point (
-  id INT PRIMARY KEY AUTO_INCREMENT,
-  total_point INT,
-  created_at TIMESTAMP DEFAULT NOW(),
-  updated_at TIMESTAMP DEFAULT NOW()
+create table collaborative_shopping_squad.point_hist
+(
+    id         int auto_increment
+        primary key,
+    member_id  int                                 null,
+    point      int                                 null,
+    content    text                                null,
+    created_at timestamp default CURRENT_TIMESTAMP null,
+    updated_at timestamp default CURRENT_TIMESTAMP null
 );
 
-CREATE TABLE point_hist (
-  id INT PRIMARY KEY AUTO_INCREMENT,
-  member_id INT,
-  point INT,
-  content TEXT,
-  created_at TIMESTAMP DEFAULT NOW(),
-  updated_at TIMESTAMP DEFAULT NOW()
+create table collaborative_shopping_squad.product
+(
+    id         int auto_increment
+        primary key,
+    created_at timestamp default CURRENT_TIMESTAMP null,
+    updated_at timestamp default CURRENT_TIMESTAMP null
 );
 
-CREATE TABLE total_like (
-  collaborator_id INT PRIMARY KEY AUTO_INCREMENT,
-  total_score INT,
-  created_at TIMESTAMP DEFAULT NOW(),
-  updated_at TIMESTAMP DEFAULT NOW()
+create table collaborative_shopping_squad.total_like
+(
+    collaborator_id int                                 not null
+        primary key,
+    total_score     int                                 null,
+    created_at      timestamp default CURRENT_TIMESTAMP null,
+    updated_at      timestamp default CURRENT_TIMESTAMP null
 );
 
-CREATE TABLE like_hist (
-  id INT PRIMARY KEY AUTO_INCREMENT,
-  member_id INT,
-  collaborator_id INT,
-  score INT,  
-  created_at TIMESTAMP DEFAULT NOW(),
-  updated_at TIMESTAMP DEFAULT NOW()
+create table collaborative_shopping_squad.trade
+(
+    id                 int auto_increment
+        primary key,
+    member_id          int                                 null,
+    collaborator_id    int                                 null,
+    name               varchar(200)                        null,
+    content            text                                null,
+    per_price          int                                 null comment '개당가격',
+    min_purchase_count int                                 null,
+    state              varchar(50)                         null,
+    origin_url         text                                null,
+    created_at         timestamp default CURRENT_TIMESTAMP null,
+    updated_at         timestamp default CURRENT_TIMESTAMP null
 );
 
-CREATE TABLE product (
-  id INT PRIMARY KEY AUTO_INCREMENT,
-  created_at TIMESTAMP DEFAULT NOW(),
-  updated_at TIMESTAMP DEFAULT NOW()
+create table collaborative_shopping_squad.trade_detail
+(
+    id             int auto_increment
+        primary key,
+    trade_id       int                                 null,
+    member_id      int                                 null,
+    purchase_count int                                 null,
+    created_at     timestamp default CURRENT_TIMESTAMP null,
+    updated_at     timestamp default CURRENT_TIMESTAMP null
 );
 
