@@ -31,7 +31,7 @@ create table collaborative_shopping_squad.bank
 (
     id         int auto_increment
         primary key,
-    code       int                                 null,
+    code       varchar(10)                         null,
     name       varchar(50)                         null,
     created_at timestamp default CURRENT_TIMESTAMP null,
     updated_at timestamp default CURRENT_TIMESTAMP null
