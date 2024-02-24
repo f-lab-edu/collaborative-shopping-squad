@@ -1,12 +1,8 @@
-package com.flab.collaboshoppingapp.domain;
+package com.flab.collaboshoppingapp.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
+import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
-import org.springframework.data.annotation.Id;
 
 import java.sql.Date;
 
@@ -17,9 +13,10 @@ import java.sql.Date;
 @Builder
 @Entity
 public class Bank {
-    @jakarta.persistence.Id
+
+
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column
@@ -35,4 +32,5 @@ public class Bank {
     private Date updatedAt;
 
 
+  
 }

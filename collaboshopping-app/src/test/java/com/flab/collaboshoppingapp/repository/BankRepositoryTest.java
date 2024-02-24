@@ -1,6 +1,6 @@
 package com.flab.collaboshoppingapp.repository;
 
-import com.flab.collaboshoppingapp.domain.Bank;
+import com.flab.collaboshoppingapp.entity.Bank;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -4,7 +4,7 @@ plugins {
     id "org.springframework.boot" version "3.2.2"
     id "io.spring.dependency-management" version "1.1.4"
 }
-
+/* 전체 프로젝트 내 전체 모듈 공통설정 */
 allprojects {
     group = "com.flab"
     version = "0.0.1-SNAPSHOT"
@@ -16,25 +16,29 @@ allprojects {
     test {
         useJUnitPlatform()
     }
-
-
 }
-
+/* 하위 프로젝트 내 전체 모듈 공통설정 */
 subprojects {
     apply plugin: "java-library"
     apply plugin: "org.springframework.boot"
     apply plugin: "io.spring.dependency-management"
 
     dependencies {
+        implementation 'org.springframework.boot:spring-boot-starter-jdbc'
         implementation "org.springframework.boot:spring-boot-starter-web"
         compileOnly "org.projectlombok:lombok"
-        developmentOnly "org.springframework.boot:spring-boot-devtools"
         annotationProcessor "org.projectlombok:lombok"
         testImplementation "org.springframework.boot:spring-boot-starter-test"
-        implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-        testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.0'
-        testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
 
+        testCompileOnly 'org.projectlombok:lombok:1.18.24'
+        testAnnotationProcessor 'org.projectlombok:lombok:1.18.24'
+        testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.0'
+        testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.6.0'
+
+        developmentOnly "org.springframework.boot:spring-boot-devtools"
+
+        implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+        implementation("org.springframework.boot:spring-boot-starter-log4j2")
     }
 }
 
@@ -52,6 +56,10 @@ java {
 configurations {
     compileOnly {
         extendsFrom annotationProcessor
+    }
+    all {
+        //logback과의 충돌 방지
+        exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'
     }
 }
 
