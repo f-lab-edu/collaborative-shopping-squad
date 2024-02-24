@@ -1,0 +1,63 @@
+plugins {
+    id "java"
+    id "java-library"
+    id "org.springframework.boot" version "3.2.2"
+    id "io.spring.dependency-management" version "1.1.4"
+}
+
+allprojects {
+    group = "com.flab"
+    version = "0.0.1-SNAPSHOT"
+
+    repositories {
+        mavenCentral()
+    }
+
+    test {
+        useJUnitPlatform()
+    }
+
+
+}
+
+subprojects {
+    apply plugin: "java-library"
+    apply plugin: "org.springframework.boot"
+    apply plugin: "io.spring.dependency-management"
+
+    dependencies {
+        implementation "org.springframework.boot:spring-boot-starter-web"
+        compileOnly "org.projectlombok:lombok"
+        developmentOnly "org.springframework.boot:spring-boot-devtools"
+        annotationProcessor "org.projectlombok:lombok"
+        testImplementation "org.springframework.boot:spring-boot-starter-test"
+        implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+        testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.0'
+        testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
+
+    }
+}
+
+project(":collaboshopping-api") {
+    dependencies {
+        implementation project(":collaboshopping-app")
+        implementation project(":collaboshopping-batch")
+    }
+}
+
+java {
+    sourceCompatibility = '17'
+}
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+
+tasks.named("test") {
+    useJUnitPlatform()
+}
+
+bootJar.enabled = false

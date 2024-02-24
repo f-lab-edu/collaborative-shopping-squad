@@ -1,3 +1,50 @@
 
 K
 collaboshopping-app/HELP.md,8\e\8ef8fa783dc95b6825fad8e0c53543d21539266b
+9
+	README.md,8\e\8ec9a00bfd09b3190ac6b22251dbb1aa95a0579d
+7
+TODO.md,b\5\b5b096f958319b1c7782c800c78c4c358a58d709
+U
+%collaboshopping-frontend/package.json,b\9\b91233113088166dfe7fe32bbf3c815525e24631
+:
+
+.gitignore,a\5\a5cc2925ca8258af241be7e5b0381edf30266302
+Z
+*collaboshopping-frontend/package-lock.json,9\7\9741aae32c161f952da554000066bcabc68ff9bd
+P
+ collaboshopping-api/build.gradle,7\d\7d95ce0cd31bfae0e17c111d5abc6e2979dd6589
+?
+settings.gradle,0\5\05efc8b1657769a27696d478ded1e95f38737233
+<
+build.gradle,f\0\f07866736216be0ee2aba49e392191aeae700a35
+P
+ collaboshopping-app/build.gradle,f\7\f76cafe35de0d780a07d646dbd927e408ebc72d8
+R
+"collaboshopping-batch/build.gradle,8\f\8fd176137061d7eeb5207c219b05d95c0d590562
+•
+ecollaboshopping-app/src/test/java/com/flab/collaboshoppingapp/CollaboshoppingAppApplicationTests.java,a\5\a5b940290ad3a374a702160b92eb985bbb00751b
+m
+=collaboshopping-app/ddl/collabo_shopping_squad_ddl_240211.sql,5\4\5417fdc329ee8b74207f7a032c63f29bca65a659
+~
+Ncollaboshopping-app/src/main/java/com/flab/collaboshoppingapp/domain/Bank.java,b\9\b9b9adf96da1539782aeef32bd45e0f5c2921cd8
+†
+Vcollaboshopping-api/src/main/java/com/flab/collaboshoppingapi/service/BankService.java,5\b\5b4371866e32eb8a499a6d4a1e17881028b4119c
+Œ
+\collaboshopping-app/src/main/java/com/flab/collaboshoppingapp/repository/BankRepository.java,7\2\72d29a8f4cbceca5a2d1b9f3a80727350e1ce40b
+
+`collaboshopping-app/src/test/java/com/flab/collaboshoppingapp/repository/BankRepositoryTest.java,f\0\f010d7905288a01c0134a146fdaa1bb66ddccd3f
+Š
+Zcollaboshopping-api/src/test/java/com/flab/collaboshoppingapi/service/BankServiceTest.java,a\c\ac693f5688ff3602f187feacf9764ca24406d1de
+•
+ecollaboshopping-api/src/test/java/com/flab/collaboshoppingapi/CollaboshoppingApiApplicationTests.java,a\1\a1571338071a46c68f3aafd8552c7cb60fd37857
+
+`collaboshopping-api/src/main/java/com/flab/collaboshoppingapi/CollaboshoppingApiApplication.java,0\5\0599fcd96ff9dd51107d80f7b0053807e14184f6
+„
+Tcollaboshopping-api/src/test/java/com/flab/collaboshoppingapi/TestConfiguration.java,c\5\c5756c77afec49ce6f47633fe979313795bf4e08
+m
+=collaboshopping-app/ddl/collabo_shopping_squad_ddl_240217.sql,e\a\ea2e0b7906e6c9d0b319b579f0d008e673550f79
+S
+#.idea/sonarlint/issuestore/index.pb,9\f\9fe84ebb15faf917b7def6236dba604453cc61e0
+]
+-.idea/sonarlint/securityhotspotstore/index.pb,8\8\88a9255124c95bdc913197c120a8d560edc59c8e

@@ -9,6 +9,9 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/collaboshopping-api" />
+            <option value="$PROJECT_DIR$/collaboshopping-app" />
+            <option value="$PROJECT_DIR$/collaboshopping-batch" />
           </set>
         </option>
       </GradleProjectSettings>
