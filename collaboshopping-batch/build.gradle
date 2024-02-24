@@ -1,5 +1,3 @@
-plugins {
-}
-
 dependencies {
+    implementation project(":collaboshopping-app")
 }
