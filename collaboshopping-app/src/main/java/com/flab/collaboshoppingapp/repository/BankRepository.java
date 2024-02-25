@@ -9,5 +9,4 @@ public interface BankRepository extends JpaRepository<Bank,Long> {
 
     Bank findByCode(String code);
 
-    Bank save(Bank build);
 }

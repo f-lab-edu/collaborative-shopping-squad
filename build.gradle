@@ -29,13 +29,12 @@ subprojects {
         implementation "org.springframework.boot:spring-boot-starter-data-jpa"
         implementation "org.springframework.boot:spring-boot-starter-web"
         implementation "com.mysql:mysql-connector-j:8.0.31"
-        
+        implementation "org.springframework.boot:spring-boot-starter-logging"
         compileOnly "org.projectlombok:lombok"
         annotationProcessor "org.projectlombok:lombok"
 
         testImplementation "org.junit.jupiter:junit-jupiter-api:5.6.0"
         testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:5.6.0"
-
         testImplementation "org.springframework.boot:spring-boot-starter-test"
     }
 
@@ -51,10 +50,6 @@ java {
 configurations {
     compileOnly {
         extendsFrom annotationProcessor
-    }
-    all {
-        //logback과의 충돌 방지
-        exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'
     }
 }
 
