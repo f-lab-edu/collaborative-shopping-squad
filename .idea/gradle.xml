@@ -19,7 +19,10 @@
         <option name="externalProjectPath" value="$PROJECT_DIR$/collaboshopping-api" />
         <option name="modules">
           <set>
+            <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/collaboshopping-api" />
+            <option value="$PROJECT_DIR$/collaboshopping-app" />
+            <option value="$PROJECT_DIR$/collaboshopping-batch" />
           </set>
         </option>
       </GradleProjectSettings>
@@ -27,7 +30,10 @@
         <option name="externalProjectPath" value="$PROJECT_DIR$/collaboshopping-app" />
         <option name="modules">
           <set>
+            <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/collaboshopping-api" />
             <option value="$PROJECT_DIR$/collaboshopping-app" />
+            <option value="$PROJECT_DIR$/collaboshopping-batch" />
           </set>
         </option>
       </GradleProjectSettings>
@@ -35,6 +41,9 @@
         <option name="externalProjectPath" value="$PROJECT_DIR$/collaboshopping-batch" />
         <option name="modules">
           <set>
+            <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/collaboshopping-api" />
+            <option value="$PROJECT_DIR$/collaboshopping-app" />
             <option value="$PROJECT_DIR$/collaboshopping-batch" />
           </set>
         </option>

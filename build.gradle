@@ -5,6 +5,7 @@ plugins {
     id "io.spring.dependency-management" version "1.1.4"
 }
 
+/* 전체 프로젝트 내 전체 모듈 공통설정 */
 allprojects {
     group = "com.flab"
     version = "0.0.1-SNAPSHOT"
@@ -16,32 +17,29 @@ allprojects {
     test {
         useJUnitPlatform()
     }
-
-
 }
 
+/* 하위 프로젝트 내 전체 모듈 공통설정 */
 subprojects {
     apply plugin: "java-library"
     apply plugin: "org.springframework.boot"
     apply plugin: "io.spring.dependency-management"
 
     dependencies {
+        implementation "org.springframework.boot:spring-boot-starter-data-jpa"
         implementation "org.springframework.boot:spring-boot-starter-web"
+        implementation "com.mysql:mysql-connector-j:8.0.31"
+        implementation "org.springframework.boot:spring-boot-starter-logging"
         compileOnly "org.projectlombok:lombok"
-        developmentOnly "org.springframework.boot:spring-boot-devtools"
         annotationProcessor "org.projectlombok:lombok"
+
+        testImplementation "org.junit.jupiter:junit-jupiter-api:5.6.0"
+        testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:5.6.0"
         testImplementation "org.springframework.boot:spring-boot-starter-test"
-        implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-        testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.0'
-        testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
-
     }
-}
 
-project(":collaboshopping-api") {
-    dependencies {
-        implementation project(":collaboshopping-app")
-        implementation project(":collaboshopping-batch")
+    task("prepareKotlinBuildScriptModel")  {
+        // prevent intellij error
     }
 }
 
