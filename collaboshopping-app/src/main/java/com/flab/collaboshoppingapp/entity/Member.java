@@ -14,16 +14,24 @@ import java.sql.Date;
 @Entity
 public class Member {
 
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column
-    private String code;
+    private String uuid;
+
+    @Column
+    private String email;
 
     @Column
     private String name;
+
+    @Column
+    private String pwHash;
+
+    @Column
+    private String role;
 
     @CreationTimestamp
     private Date createdAt;
@@ -32,5 +40,7 @@ public class Member {
     private Date updatedAt;
 
 
-  
+
+
+
 }
