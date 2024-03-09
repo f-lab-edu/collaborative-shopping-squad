@@ -1,4 +1,4 @@
-package com.flab.collaboshoppingapi.exception;
+package com.flab.collaboshoppingapi.common.exception;
 
 import lombok.Getter;
 import lombok.Setter;

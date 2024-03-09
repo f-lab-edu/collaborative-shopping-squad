@@ -5,8 +5,8 @@ import '../plugins/vuetify.js'
 import '../plugins/webfontloader.js'
 import MainHeader from "@/components/MainHeader.vue";
 import MainFooter from "@/components/MainFooter.vue";
-import { ref } from 'vue'
-import { useField, useForm } from 'vee-validate'
+import {ref} from 'vue'
+import {useField, useForm} from 'vee-validate'
 
 export default {
   name: 'Join',
@@ -21,34 +21,34 @@ export default {
 
 import api from "@/plugins/axios.js";
 
-const { handleSubmit, handleReset } = useForm({
+const {handleSubmit, handleReset} = useForm({
   validationSchema: {
-    name (value) {
+    name(value) {
       if (value?.length >= 2) return true
 
       return 'Name needs to be at least 2 characters.'
     },
-    phone (value) {
+    phone(value) {
       if (value?.length > 9 && /[0-9-]+/.test(value)) return true
 
       return 'Phone number needs to be at least 9 digits.'
     },
-    email (value) {
+    email(value) {
       if (/^[a-z.-]+@[a-z.-]+\.[a-z]+$/i.test(value)) return true
 
       return 'Must be a valid e-mail.'
     },
-    pw (value) {
-      if(value?.length >= 2) return true
+    pw(value) {
+      if (value?.length >= 2) return true
 
       return 'Name needs to be at least 2 characters.'
     },
-    select (value) {
+    select(value) {
       if (value) return true
 
       return 'Select an item.'
     },
-    checkbox (value) {
+    checkbox(value) {
       if (value === '1') return true
 
       return 'Must be checked.'
@@ -70,8 +70,8 @@ const items = ref([
 ])
 
 const submit = handleSubmit(values => {
-  alert(JSON.stringify(values, null, 2))
-  api.post("/join",JSON.stringify(values, null, 2),{
+  //alert(JSON.stringify(values, null, 2))
+  api.post("/join", JSON.stringify(values, null, 2), {
     headers: {
       "Content-Type": `application/json`,
     },
@@ -79,8 +79,11 @@ const submit = handleSubmit(values => {
     console.log("---axios Post 성공---- ");
     this.data = res.data;
     console.log(res.data);
-  }).catch(error =>{
+  }).catch(error => {
     console.log(error.response);
+    if(error.response.data.code=="MEMBER-ERR-C001"){
+      alert("중복된 이메일 입니다.");
+    }
   });
 })
 </script>

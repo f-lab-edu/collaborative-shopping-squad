@@ -2,3 +2,10 @@ spring:
   profiles:
     include:
       - database
+cors:
+  allow:
+    origins: http://localhost:5173
+# JWT
+jwt:
+  issuer: test@test.com
+  secret_key: testProjectTestJwtProjectTest@Test.com/TestProjectTestJwtProjectTestTestTest

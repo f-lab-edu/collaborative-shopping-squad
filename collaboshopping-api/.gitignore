@@ -37,4 +37,4 @@ out/
 .vscode/
 
 ### Frontend ###
-/collaboshopping-frontend/node_modules/*
+collaboshopping-frontend/node_modules/*
