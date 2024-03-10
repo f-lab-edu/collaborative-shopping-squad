@@ -105,3 +105,7 @@ Zcollaboshopping-app/src/main/java/com/flab/collaboshoppingapp/config/DataSource
 lcollaboshopping-api/src/main/java/com/flab/collaboshoppingapi/presentation/CustomAuthenticationProvider.java,5\d\5d1a5611dda766b438dfb6c92089fd79e38fbf71
 œ
 lcollaboshopping-api/src/main/java/com/flab/collaboshoppingapi/presentation/MemberAuthenticationProvider.java,f\9\f94ebaab462866d7586a7fb643db7916674b3290
+–
+fcollaboshopping-api/src/main/java/com/flab/collaboshoppingapi/infrastructure/AuthenticationConfig.java,6\7\67a2df396a053253812b410aba2646577509587e
+‰
+Ycollaboshopping-api/src/main/java/com/flab/collaboshoppingapi/infrastructure/JwtUtil.java,f\d\fd1756c59e00a0fe9924f82d165b268d055c08c5

@@ -71,7 +71,7 @@ const items = ref([
 
 const submit = handleSubmit(values => {
   //alert(JSON.stringify(values, null, 2))
-  api.post("/join", JSON.stringify(values, null, 2), {
+  api.post("/member/join", JSON.stringify(values, null, 2), {
     headers: {
       "Content-Type": `application/json`,
     },

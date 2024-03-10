@@ -6,7 +6,7 @@ const app = createApp({})
 // create an axios api
 const api = axios.create({
     //baseURL: "http://localhost:8080" // replace with your base URL
-    baseURL: "/api"
+    baseURL: "/api/v1"
     })
 app.use(VueAxios, api)
 export default api

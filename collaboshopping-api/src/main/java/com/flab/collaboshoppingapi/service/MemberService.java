@@ -3,14 +3,14 @@ package com.flab.collaboshoppingapi.service;
 import com.flab.collaboshoppingapi.common.exception.DuplicateEmailException;
 import com.flab.collaboshoppingapi.common.exception.ErrorCode;
 import com.flab.collaboshoppingapi.common.exception.WrongPasswordException;
+import com.flab.collaboshoppingapi.infrastructure.JwtUtil;
 import com.flab.collaboshoppingapi.service.dto.MemberDTO;
 import com.flab.collaboshoppingapp.entity.Member;
 import com.flab.collaboshoppingapp.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -18,14 +18,14 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
 @Slf4j
 public class MemberService implements UserDetailsService {
+    @Value("${jwt.expiredMs}")
+    Long expiredMs;
 
     @Autowired
     private final MemberRepository memberRepository;
@@ -41,15 +41,18 @@ public class MemberService implements UserDetailsService {
     }
 
     @Transactional
-    public void login(MemberDTO memberDTO) {
-        loadUserByUsername(memberDTO.getEmail());
+    public String login(MemberDTO memberDTO) {
+        Member member = (Member) loadUserByUsername(memberDTO.getEmail());
 
+        validatePassword(memberDTO,member);
 
+        return JwtUtil.createJwt(memberDTO.getEmail(),expiredMs * 1000 * 60L);
 
+        /*
         List<GrantedAuthority> roles = new ArrayList<>();
         roles.add(new SimpleGrantedAuthority("USER")); // 권한 부여
 
-        /*token = new UsernamePasswordAuthenticationToken(userVo.getId(), null, roles);
+        token = new UsernamePasswordAuthenticationToken(userVo.getId(), null, roles);
         // 인증된 user 정보를 담아 SecurityContextHolder에 저장되는 token
 
         return token;*/

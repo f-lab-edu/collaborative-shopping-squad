@@ -29,20 +29,21 @@ const email = useField('email')
 const checkbox = useField('checkbox')
 
 const submit = handleSubmit(values => {
-  alert(JSON.stringify(values, null, 2))
-  api.post("/login",JSON.stringify(values, null, 2), {
+  //alert(JSON.stringify(values, null, 2))
+  api.post("/member/login",JSON.stringify(values, null, 2), {
     headers: {
       "Content-Type": `application/json`,
     },
   }).then((res) => {
-    console.log("---axios Get 성공---- ");
+    console.log("---axios Post 성공---- ");
     this.data = res.data;
     console.log(res.data);
   }).catch(error => {
     console.log(error.response);
     if(error.response.data.code==="MEMBER-ERR-C002" || error.response.data.code==="MEMBER-ERR-C003"){
-      alert("계정정보가 잘못되었습니다.");
+      console.log("계정정보가 잘못되었습니다.");
     }
+    alert("로그인에 실패했습니다.");
   });
 })
 </script>

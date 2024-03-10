@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -20,15 +21,13 @@ import java.util.Collections;
 @Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor
-public class SecurityConfig {
+public class AuthenticationConfig {
 
     private final UserDetailsService userService;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Value("${cors.allow.origins}")
     private String corsAllowOrigins;
-
-
 
 
     // 스프링 시큐리티 기능 비활성화
@@ -47,7 +46,7 @@ public class SecurityConfig {
                     @Override
                     public CorsConfiguration getCorsConfiguration(HttpServletRequest request) {
                         CorsConfiguration config = new CorsConfiguration();
-                        config.setAllowedOrigins(Collections.singletonList("http://localhost:5173"));
+                        config.setAllowedOrigins(Collections.singletonList(corsAllowOrigins));
                         config.setAllowedMethods(Collections.singletonList("*"));
                         config.setAllowCredentials(true);
                         config.setAllowedHeaders(Collections.singletonList("*"));
@@ -59,38 +58,13 @@ public class SecurityConfig {
                 // 스프링에서는 csrf 기본은 활성화 (보안 목적) ---> csrf 토큰을 url에 포함해야 서버는 응답
                 .csrf((csrf) -> csrf.disable())
                 .authorizeHttpRequests((requests)->requests
-                        .requestMatchers("/user").authenticated()
-                        .requestMatchers("/*").permitAll());
+                        .requestMatchers("/api/v1/member/join","/api/v1/member/login").permitAll()
+                        .requestMatchers(HttpMethod.POST,"/api/v1/**").authenticated());
                         //.requestMatchers("/api/v1/public/register").permitAll());
                 //.formLogin(Customizer.withDefaults())
                 //.httpBasic(Customizer.withDefaults());
         return http.build();
     }
-
-    /*// ⭐️ CORS 설정
-    CorsConfigurationSource corsConfigurationSource() {
-        return request -> {
-            CorsConfiguration config = new CorsConfiguration();
-            config.setAllowedHeaders(Collections.singletonList("*"));
-            config.setAllowedMethods(Collections.singletonList("*"));
-            config.setAllowedOriginPatterns(Collections.singletonList("http://localhost:5173")); // ⭐️ 허용할 origin
-            config.setAllowCredentials(true);
-            return config;
-        };
-    }
-
-    @Bean
-    public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
-        httpSecurity.httpBasic(HttpBasicConfigurer::disable)
-                .cors(corsConfigurer -> corsConfigurer.configurationSource(corsConfigurationSource())) // ⭐️⭐️⭐️
-                .csrf(AbstractHttpConfigurer::disable)
-                .authorizeHttpRequests(authorize ->
-                        authorize
-                                .requestMatchers("/login").permitAll()
-                );
-
-        return httpSecurity.build();
-    }*/
 
 
     // 인증 관리자 관련 설정
