@@ -1,4 +1,4 @@
-package com.flab.collaboshoppingapi.infrastructure;
+package com.flab.collaboshoppingapi.infrastructure.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

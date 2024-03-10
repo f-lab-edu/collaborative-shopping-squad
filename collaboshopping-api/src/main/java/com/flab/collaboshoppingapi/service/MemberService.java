@@ -1,19 +1,14 @@
 package com.flab.collaboshoppingapi.service;
 
-import com.flab.collaboshoppingapi.common.exception.DuplicateEmailException;
+import com.flab.collaboshoppingapi.common.exception.CustomException;
 import com.flab.collaboshoppingapi.common.exception.ErrorCode;
-import com.flab.collaboshoppingapi.common.exception.WrongPasswordException;
-import com.flab.collaboshoppingapi.infrastructure.JwtUtil;
+import com.flab.collaboshoppingapi.infrastructure.util.JwtUtil;
 import com.flab.collaboshoppingapi.service.dto.MemberDTO;
 import com.flab.collaboshoppingapp.entity.Member;
 import com.flab.collaboshoppingapp.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,15 +18,13 @@ import java.util.UUID;
 @Service
 @RequiredArgsConstructor
 @Slf4j
-public class MemberService implements UserDetailsService {
+public class MemberService {
     @Value("${jwt.expiredMs}")
     Long expiredMs;
-
-    @Autowired
     private final MemberRepository memberRepository;
-
-    @Autowired
     private final BCryptPasswordEncoder passwordEncoder;
+    private final UserDetailServiceAdapter userDetailServiceAdapter;
+    private final JwtUtil jwtUtil;
 
     @Transactional
     public Long join(MemberDTO memberDTO) {
@@ -42,20 +35,16 @@ public class MemberService implements UserDetailsService {
 
     @Transactional
     public String login(MemberDTO memberDTO) {
-        Member member = (Member) loadUserByUsername(memberDTO.getEmail());
+        Member member = (Member) userDetailServiceAdapter.loadUserByUsername(memberDTO.getEmail());
 
         validatePassword(memberDTO,member);
 
-        return JwtUtil.createJwt(memberDTO.getEmail(),expiredMs * 1000 * 60L);
+        //엑세스토큰(짧은시간), 리프레쉬토큰(긴시간)
+        //엑세스토큰 만료 시 리프레쉬토큰을 통해 발급
+        //엑세스토큰 설정 해두고
+        return jwtUtil.createAccessToken(memberDTO.getEmail(),expiredMs * 1000 * 60L);
 
-        /*
-        List<GrantedAuthority> roles = new ArrayList<>();
-        roles.add(new SimpleGrantedAuthority("USER")); // 권한 부여
 
-        token = new UsernamePasswordAuthenticationToken(userVo.getId(), null, roles);
-        // 인증된 user 정보를 담아 SecurityContextHolder에 저장되는 token
-
-        return token;*/
 
     }
 
@@ -64,26 +53,22 @@ public class MemberService implements UserDetailsService {
         member.setName(memberDTO.getName());
         member.setRole(memberDTO.getRole());
         member.setEmail(memberDTO.getEmail());
-        member.setPwHash(passwordEncoder.encode(memberDTO.getPw()));
+        member.setPwHash(passwordEncoder.encode(memberDTO.getPassword()));
         member.setUuid(UUID.randomUUID().toString().replace("-", ""));
         return member;
     }
 
     private void validateDuplicateEmail(String email) {
         if(memberRepository.existsByEmail(email)){
-            throw new DuplicateEmailException("email duplicated", ErrorCode.EMAIL_DUPLICATION);
+            throw new CustomException("email duplicated", ErrorCode.EMAIL_DUPLICATION);
         }
     }
 
     private void validatePassword(MemberDTO checkInfo, Member originInfo) {
-        if(!passwordEncoder.matches(checkInfo.getPw(),originInfo.getPwHash())){
-            throw new WrongPasswordException("wrong password", ErrorCode.WRONG_PASSWORD);
+        if(!passwordEncoder.matches(checkInfo.getPassword(),originInfo.getPwHash())){
+            throw new CustomException("wrong password", ErrorCode.WRONG_PASSWORD);
         }
     }
 
-    @Override
-    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        return memberRepository.findByEmail(email)
-                .orElseThrow(() -> new IllegalArgumentException(email));
-    }
+
 }

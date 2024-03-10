@@ -1,4 +1,4 @@
-package com.flab.collaboshoppingapi.presentation;
+package com.flab.collaboshoppingapi.presentation.controller;
 
 import com.flab.collaboshoppingapp.repository.BankRepository;
 import lombok.RequiredArgsConstructor;

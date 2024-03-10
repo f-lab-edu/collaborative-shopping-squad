@@ -1,6 +1,6 @@
-package com.flab.collaboshoppingapi.presentation;
+package com.flab.collaboshoppingapi.presentation.controller;
 
-import com.flab.collaboshoppingapi.service.MemberService;
+import com.flab.collaboshoppingapi.service.UserDetailServiceAdapter;
 import com.flab.collaboshoppingapp.entity.Member;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -18,14 +18,15 @@ import javax.security.auth.login.CredentialExpiredException;
 @RequiredArgsConstructor
 public class MemberAuthenticationProvider {
 
-    private final MemberService memberService;
+    private final UserDetailServiceAdapter UserDetailServiceAdapter;
     private final PasswordEncoder passwordEncoder;
 
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         String username = (String) authentication.getPrincipal();
         String password = (String) authentication.getCredentials();
 
-        Member member = (Member) memberService.loadUserByUsername(username);
+        Member member = (Member) UserDetailServiceAdapter
+                .loadUserByUsername(username);
 
         try {
             //패스워드 체크

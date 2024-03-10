@@ -38,7 +38,7 @@ const {handleSubmit, handleReset} = useForm({
 
       return 'Must be a valid e-mail.'
     },
-    pw(value) {
+    password(value) {
       if (value?.length >= 2) return true
 
       return 'Name needs to be at least 2 characters.'
@@ -60,7 +60,7 @@ const phone = useField('phone')
 const email = useField('email')
 const select = useField('select')
 const checkbox = useField('checkbox')
-const pw = useField('pw')
+const password = useField('password')
 
 const items = ref([
   'Item 1',
@@ -71,7 +71,7 @@ const items = ref([
 
 const submit = handleSubmit(values => {
   //alert(JSON.stringify(values, null, 2))
-  api.post("/member/join", JSON.stringify(values, null, 2), {
+  api.post("/api/v1/members/join", JSON.stringify(values, null, 2), {
     headers: {
       "Content-Type": `application/json`,
     },
@@ -113,8 +113,8 @@ const submit = handleSubmit(values => {
       ></v-text-field>
 
       <v-text-field
-          v-model="pw.value.value"
-          :error-messages="pw.errorMessage.value"
+          v-model="password.value.value"
+          :error-messages="password.errorMessage.value"
           label="패스워드"
       ></v-text-field>
 

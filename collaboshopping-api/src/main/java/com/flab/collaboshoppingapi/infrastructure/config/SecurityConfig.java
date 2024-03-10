@@ -1,4 +1,4 @@
-package com.flab.collaboshoppingapi.infrastructure;
+package com.flab.collaboshoppingapi.infrastructure.config;
 
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -21,9 +23,9 @@ import java.util.Collections;
 @Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor
-public class AuthenticationConfig {
+public class SecurityConfig {
 
-    private final UserDetailsService userService;
+    private final UserDetailsService userDetailsService;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Value("${cors.allow.origins}")
@@ -58,7 +60,7 @@ public class AuthenticationConfig {
                 // 스프링에서는 csrf 기본은 활성화 (보안 목적) ---> csrf 토큰을 url에 포함해야 서버는 응답
                 .csrf((csrf) -> csrf.disable())
                 .authorizeHttpRequests((requests)->requests
-                        .requestMatchers("/api/v1/member/join","/api/v1/member/login").permitAll()
+                        .requestMatchers("/api/v1/members/join","/api/v1/members/login").permitAll()
                         .requestMatchers(HttpMethod.POST,"/api/v1/**").authenticated());
                         //.requestMatchers("/api/v1/public/register").permitAll());
                 //.formLogin(Customizer.withDefaults())
@@ -67,15 +69,14 @@ public class AuthenticationConfig {
     }
 
 
-    // 인증 관리자 관련 설정
+
+
     @Bean
-    public DaoAuthenticationProvider daoAuthenticationProvider() throws Exception {
-        DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
-
-        daoAuthenticationProvider.setUserDetailsService(userService);
-        daoAuthenticationProvider.setPasswordEncoder(bCryptPasswordEncoder);
-
-        return daoAuthenticationProvider;
+    public AuthenticationManager authenticationManager(){
+        DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
+        authProvider.setUserDetailsService(userDetailsService);
+        authProvider.setPasswordEncoder(bCryptPasswordEncoder);
+        return new ProviderManager(authProvider);
     }
 
 

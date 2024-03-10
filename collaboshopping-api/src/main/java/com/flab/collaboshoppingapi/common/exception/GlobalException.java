@@ -12,27 +12,6 @@ public class GlobalException {
 
 
 
-    @ExceptionHandler(DuplicateEmailException.class)
-    public ResponseEntity<ErrorResponse> handleDuplicateEmailException(DuplicateEmailException ex){
-        log.error("handleDuplicateEmailException",ex);
-        ErrorResponse response = new ErrorResponse(ex.getErrorCode());
-        return new ResponseEntity<>(response, HttpStatus.valueOf(ex.getErrorCode().getStatus()));
-    }
-
-    @ExceptionHandler(NotExistEmailException.class)
-    public ResponseEntity<ErrorResponse> handleNotExistEmailException(NotExistEmailException ex){
-        log.error("handleNotExistEmailException",ex);
-        ErrorResponse response = new ErrorResponse(ex.getErrorCode());
-        return new ResponseEntity<>(response, HttpStatus.valueOf(ex.getErrorCode().getStatus()));
-    }
-
-    @ExceptionHandler(WrongPasswordException.class)
-    public ResponseEntity<ErrorResponse> handleWrongPasswordException(WrongPasswordException ex){
-        log.error("handleWrongPasswordException",ex);
-        ErrorResponse response = new ErrorResponse(ex.getErrorCode());
-        return new ResponseEntity<>(response, HttpStatus.valueOf(ex.getErrorCode().getStatus()));
-    }
-
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ErrorResponse> handleException(Exception ex){
         log.error("handleException",ex);

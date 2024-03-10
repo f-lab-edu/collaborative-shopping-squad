@@ -24,13 +24,13 @@ import api from "@/plugins/axios.js";
 const { handleSubmit, handleReset } = useForm({
 
 })
-const pw = useField('pw')
+const password = useField('password')
 const email = useField('email')
 const checkbox = useField('checkbox')
 
 const submit = handleSubmit(values => {
   //alert(JSON.stringify(values, null, 2))
-  api.post("/member/login",JSON.stringify(values, null, 2), {
+  api.post("/api/v1/members/login",JSON.stringify(values, null, 2), {
     headers: {
       "Content-Type": `application/json`,
     },
@@ -59,7 +59,7 @@ const submit = handleSubmit(values => {
       ></v-text-field>
 
       <v-text-field
-          v-model="pw.value.value"
+          v-model="password.value.value"
           label="패스워드"
       ></v-text-field>
 
