@@ -9,4 +9,4 @@ cors:
 jwt:
   expiredMs: 60
   issuer: test@test.com
-  secret_key: testProjectTestJwtProjectTest@Test.com/TestProjectTestJwtProjectTestTestTest
+  secret_key: vmfhaltmskdlstkfkdgodyroqkfwkdbalroqkfwkdbalaaaaaaaaaaaaaaaabbbbb

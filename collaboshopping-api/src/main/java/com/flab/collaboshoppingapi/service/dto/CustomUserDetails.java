@@ -1,63 +1,72 @@
-package com.flab.collaboshoppingapi.presentation.controller;
+package com.flab.collaboshoppingapi.service.dto;
 
-import com.flab.collaboshoppingapi.service.dto.CustomUserInfoDto;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
+import com.flab.collaboshoppingapp.entity.Member;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 
-@Getter
-@RequiredArgsConstructor
 public class CustomUserDetails implements UserDetails {
 
-    private final CustomUserInfoDto member;
+    private final Member member;
+
+    public CustomUserDetails(Member member) {
+
+        this.member = member;
+    }
+
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        List<String> roles = new ArrayList<>();
-        roles.add("ROLE_" + member.getRole().toString());
 
-        return null;
-       /* return roles.stream()
-                .map(SimpleGrantedAuthority::new)
-                .collect(Collectors.toList());*/
+        Collection<GrantedAuthority> collection = new ArrayList<>();
+
+        collection.add(new GrantedAuthority() {
+
+            @Override
+            public String getAuthority() {
+
+                return member.getRole();
+            }
+        });
+
+        return collection;
     }
 
     @Override
     public String getPassword() {
+
         return member.getPassword();
     }
 
     @Override
     public String getUsername() {
-        return member.getMemberId().toString();
-    }
 
+        return member.getUsername();
+    }
 
     @Override
     public boolean isAccountNonExpired() {
+
         return true;
     }
 
     @Override
     public boolean isAccountNonLocked() {
+
         return true;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
+
         return true;
     }
 
     @Override
     public boolean isEnabled() {
+
         return true;
     }
-
-
-
 }
