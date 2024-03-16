@@ -1,12 +1,13 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Home from '@/views/Home.vue'
 import HomeView from "@/views/HomeView.vue";
+import Main from "@/views/Main.vue";
 
 const routes = [
     {
         path: '/',       // 스프링으로 치면 킨트롤러부분같은 느낌이다.
-        name: 'Home',
-        component: Home
+        name: 'Main',
+        component: Main
     },{
         path: '/login',
         name: 'Login',
@@ -16,11 +17,12 @@ const routes = [
         name: 'Join',
         component: () => import(/* webpackChunkName: "about" */ '../views/Join.vue')
     },{
+        path: '/collaboratorRegister',
+        name: 'CollaboratorRegister',
+        component: () => import(/* webpackChunkName: "about" */ '../views/CollaboratorRegister.vue')
+    },{
         path: '/about',
         name: 'About',
-        // route level code-splitting
-        // this generates a separate chunk (about.[hash].js) for this route
-        // which is lazy-loaded when the route is visited.
         component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
     },{
         path: '/home',       // 스프링으로 치면 킨트롤러부분같은 느낌이다.

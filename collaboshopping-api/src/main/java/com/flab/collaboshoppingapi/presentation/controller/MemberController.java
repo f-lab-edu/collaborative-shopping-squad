@@ -31,10 +31,11 @@ public class MemberController  {
     }
 
     @PostMapping("/join")
-    public void join(@RequestBody @Validated MemberJoinRequest request) throws Exception {
+    public String join(@RequestBody @Validated MemberJoinRequest request) throws Exception {
         log.info("join");
         log.info(request.toString());
         memberSevice.join(memberMapper.fromMemberJoinRequest(request));
+        return "complete";
     }
 
     @PostMapping("/login")

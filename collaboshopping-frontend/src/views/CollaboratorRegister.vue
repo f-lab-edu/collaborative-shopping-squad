@@ -9,7 +9,7 @@ import {ref} from 'vue'
 import {useField, useForm} from 'vee-validate'
 
 export default {
-  name: 'Login',
+  name: 'CollaboratorRegister',
   components: {
     MainHeader,
     MainFooter
@@ -21,8 +21,6 @@ export default {
 
 import api from "@/plugins/axios.js";
 import {TOKEN_KEY} from "../../common/variable.js";
-import {createRouter as $router} from "vue-router";
-import router from "@/router/index.js";
 
 const {handleSubmit, handleReset} = useForm({})
 const password = useField('password')
@@ -39,8 +37,6 @@ const submit = handleSubmit(values => {
     console.log("---axios Post 성공---- ");
 
     localStorage.setItem(TOKEN_KEY, res.data);
-
-    router.replace({path:'/'}); // URL로 이동
 
   }).catch(error => {
     console.log(error.response);
