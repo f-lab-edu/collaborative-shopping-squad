@@ -2,3 +2,11 @@ spring:
   profiles:
     include:
       - database
+cors:
+  allow:
+    origins: http://localhost:5173
+# JWT
+jwt:
+  expiredMs: 60
+  issuer: test@test.com
+  secret_key: vmfhaltmskdlstkfkdgodyroqkfwkdbalroqkfwkdbalaaaaaaaaaaaaaaaabbbbb
