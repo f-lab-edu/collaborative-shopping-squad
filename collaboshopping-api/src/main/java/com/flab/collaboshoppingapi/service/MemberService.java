@@ -9,6 +9,7 @@ import com.flab.collaboshoppingapp.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -35,9 +36,9 @@ public class MemberService {
 
     @Transactional
     public String login(MemberDTO memberDTO) {
-        Member member = (Member) userDetailServiceAdapter.loadUserByUsername(memberDTO.getEmail());
+        UserDetails member = userDetailServiceAdapter.loadUserByUsername(memberDTO.getEmail());
 
-        validatePassword(memberDTO,member);
+        validatePassword(memberDTO.getPassword(),member.getPassword());
 
         //엑세스토큰(짧은시간), 리프레쉬토큰(긴시간)
         //엑세스토큰 만료 시 리프레쉬토큰을 통해 발급
@@ -64,8 +65,8 @@ public class MemberService {
         }
     }
 
-    private void validatePassword(MemberDTO checkInfo, Member originInfo) {
-        if(!passwordEncoder.matches(checkInfo.getPassword(),originInfo.getPwHash())){
+    private void validatePassword(String password, String passwordHash) {
+        if(!passwordEncoder.matches(password,passwordHash)){
             throw new CustomException("wrong password", ErrorCode.WRONG_PASSWORD);
         }
     }

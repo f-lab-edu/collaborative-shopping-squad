@@ -7,7 +7,6 @@ import com.flab.collaboshoppingapi.service.MemberService;
 import com.flab.collaboshoppingapi.service.dto.MemberDTO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -39,13 +38,12 @@ public class MemberController  {
     }
 
     @PostMapping("/login")
-    public void login(@RequestBody @Validated MemberLoginRequest request) throws Exception {
+    public String login(@RequestBody @Validated MemberLoginRequest request) throws Exception {
         log.info("login");
         log.info(request.toString());
-        String token = memberSevice.login(memberMapper.fromMemberLoginRequest(request));
-        String name = SecurityContextHolder.getContext().getAuthentication().getName();
-        log.info(token);
-        log.info(name);
+
+        return memberSevice.login(memberMapper.fromMemberLoginRequest(request));
+
     }
 
     //limit-offset 페이징 - limit-where 조건절로 처리가능
