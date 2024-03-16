@@ -2,7 +2,7 @@ package com.flab.collaboshoppingapi.service;
 
 import com.flab.collaboshoppingapi.common.exception.CustomException;
 import com.flab.collaboshoppingapi.common.exception.ErrorCode;
-import com.flab.collaboshoppingapi.infrastructure.util.JwtUtil;
+import com.flab.collaboshoppingapi.infrastructure.util.JWTUtil;
 import com.flab.collaboshoppingapi.service.dto.MemberDTO;
 import com.flab.collaboshoppingapp.entity.Member;
 import com.flab.collaboshoppingapp.repository.MemberRepository;
@@ -24,7 +24,7 @@ public class MemberService {
     private final MemberRepository memberRepository;
     private final BCryptPasswordEncoder passwordEncoder;
     private final UserDetailServiceAdapter userDetailServiceAdapter;
-    private final JwtUtil jwtUtil;
+    private final JWTUtil jwtUtil;
 
     @Transactional
     public Long join(MemberDTO memberDTO) {
@@ -42,7 +42,7 @@ public class MemberService {
         //엑세스토큰(짧은시간), 리프레쉬토큰(긴시간)
         //엑세스토큰 만료 시 리프레쉬토큰을 통해 발급
         //엑세스토큰 설정 해두고
-        return jwtUtil.createAccessToken(memberDTO.getEmail(),expiredMs * 1000 * 60L);
+        return jwtUtil.createJwt(memberDTO.getEmail(),"ROLE_USER",expiredMs * 1000 * 60L);
 
 
 

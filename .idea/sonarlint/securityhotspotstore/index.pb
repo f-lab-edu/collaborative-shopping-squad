@@ -107,12 +107,6 @@ icollaboshopping-api/src/main/java/com/flab/collaboshoppingapi/presentation/requ
 ^collaboshopping-api/src/main/java/com/flab/collaboshoppingapi/infrastructure/util/JwtUtil.java,5\0\509de7b54951f302dc05e0ba28a9e5bc3fcdfe95
 í
 bcollaboshopping-api/src/main/java/com/flab/collaboshoppingapi/infrastructure/config/AppConfig.java,d\0\d01a2ca4c0cee898c89117ea36a1f82657962612
-ê
-`collaboshopping-api/src/main/java/com/flab/collaboshoppingapi/service/dto/CustomUserInfoDto.java,8\e\8e95119de5f5a1706d80a8881150ed4c83a7a035
-ú
-lcollaboshopping-api/src/main/java/com/flab/collaboshoppingapi/presentation/controller/CustomUserDetails.java,b\2\b202d8b3f01102c722e8b228f6bbef0b962e1068
-á
-Wcollaboshopping-api/src/main/java/com/flab/collaboshoppingapi/service/dto/RoleType.java,d\8\d852417a7dded307f1b2d095f939d2c3ed755fd0
 í
 bcollaboshopping-api/src/main/java/com/flab/collaboshoppingapi/presentation/controller/ApiPath.java,6\1\613ad6b981a9580d08977aabe22c749facad7feb
 ô
@@ -125,3 +119,5 @@ bcollaboshopping-api/src/main/java/com/flab/collaboshoppingapi/infrastructure/ut
 `collaboshopping-api/src/main/java/com/flab/collaboshoppingapi/service/dto/CustomUserDetails.java,2\c\2c4a6865792b28b9d78a5fec35d1c6fefc06eb7e
 é
 ^collaboshopping-api/src/main/java/com/flab/collaboshoppingapi/infrastructure/util/JWTUtil.java,c\9\c9edc9191e1d0bf69f1087ea0af7b06543986aac
+ê
+`collaboshopping-api/src/main/java/com/flab/collaboshoppingapi/infrastructure/util/JWTFilter.java,0\0\00f0db89084e970539aeac9796bb928425c81f0d

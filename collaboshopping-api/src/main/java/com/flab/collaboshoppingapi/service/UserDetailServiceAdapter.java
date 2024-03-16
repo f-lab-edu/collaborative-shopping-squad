@@ -1,5 +1,6 @@
 package com.flab.collaboshoppingapi.service;
 
+import com.flab.collaboshoppingapi.service.dto.CustomUserDetails;
 import com.flab.collaboshoppingapp.entity.Member;
 import com.flab.collaboshoppingapp.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
