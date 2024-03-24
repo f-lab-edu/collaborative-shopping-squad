@@ -16,8 +16,4 @@ public class HelloController {
         return "Hello, Collabo Shopping!";
     }
 
-    @GetMapping("/test-repository")
-    public void test() {
-        bankRepository.findAll(); 
-    }
 }

@@ -4,4 +4,5 @@ public class ApiPath {
     private ApiPath(){}
 
     public static final String MEMBER_V1 = "/api/v1/members";
+    public static final String COLLABORATOR_V1 = "/api/v1/collaborators";
 }

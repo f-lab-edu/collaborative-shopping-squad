@@ -20,6 +20,7 @@ export default {
 
 
 import api from "@/plugins/axios.js";
+import router from "@/router/index.js";
 
 const {handleSubmit, handleReset} = useForm({
   validationSchema: {
@@ -70,22 +71,27 @@ const items = ref([
 ])
 
 const submit = handleSubmit(values => {
-  //alert(JSON.stringify(values, null, 2))
-  api.post("/api/v1/members/join", JSON.stringify(values, null, 2), {
-    headers: {
-      "Content-Type": `application/json`,
-    },
-  }).then((res) => {
-    console.log("---axios Post 성공---- ");
-    this.data = res.data;
-    console.log(res.data);
-  }).catch(error => {
-    console.log(error.response);
-    if(error.response.data.code=="MEMBER-ERR-C001"){
-      alert("중복된 이메일 입니다.");
+      //alert(JSON.stringify(values, null, 2))
+      api.post("/api/v1/members/join", JSON.stringify(values, null, 2), {
+        headers: {
+          "Content-Type": `application/json`,
+        },
+      }).then((res) => {
+        console.log("---axios Post 성공---- ");
+
+        router.replace({path:'/login'});
+
+
+      }).catch(error => {
+        console.log(error.response);
+        if (error.response === undefined) {
+
+        } else if (error.response.data.code === "MEMBER-ERR-C001") {
+          alert("중복된 이메일 입니다.");
+        }
+      });
     }
-  });
-})
+)
 </script>
 
 <template>
