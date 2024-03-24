@@ -20,10 +20,10 @@ public class Collaborator {
     private Long id;
 
     @Column
-    private String code;
+    private String member_id;
 
     @Column
-    private String name;
+    private int profit;
 
     @CreationTimestamp
     private Date createdAt;

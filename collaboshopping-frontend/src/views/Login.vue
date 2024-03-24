@@ -41,6 +41,7 @@ const submit = handleSubmit(values => {
     localStorage.setItem(TOKEN_KEY, res.data);
 
     router.replace({path:'/'}); // URL로 이동
+    window.alert("로그인하였습니다.");
 
   }).catch(error => {
     console.log(error.response);

@@ -23,27 +23,27 @@ import api from "@/plugins/axios.js";
 import {TOKEN_KEY} from "../../common/variable.js";
 
 const {handleSubmit, handleReset} = useForm({})
-const password = useField('password')
-const email = useField('email')
+const address = useField('address')
+const name = useField('name')
 const checkbox = useField('checkbox')
 
 const submit = handleSubmit(values => {
   //alert(JSON.stringify(values, null, 2))
-  api.post("/api/v1/members/login", JSON.stringify(values, null, 2), {
+  api.post("/api/v1/collaborators/apply", JSON.stringify(values, null, 2), {
     headers: {
       "Content-Type": `application/json`,
     },
   }).then((res) => {
     console.log("---axios Post 성공---- ");
 
-    localStorage.setItem(TOKEN_KEY, res.data);
+
 
   }).catch(error => {
     console.log(error.response);
     if (error.response.data.code === "MEMBER-ERR-C002" || error.response.data.code === "MEMBER-ERR-C003") {
       console.log("계정정보가 잘못되었습니다.");
     }
-    alert("로그인에 실패했습니다.");
+    alert("오류로 등록에 실패했습니다.");
   });
 })
 </script>
@@ -54,19 +54,19 @@ const submit = handleSubmit(values => {
     <form @submit.prevent="submit">
 
       <v-text-field
-          v-model="email.value.value"
-          label="E-mail"
+          v-model="address.value.value"
+          label="지역"
       ></v-text-field>
 
       <v-text-field
-          v-model="password.value.value"
-          label="패스워드"
+          v-model="name.value.value"
+          label="이름"
       ></v-text-field>
 
 
       <v-checkbox
           v-model="checkbox.value.value"
-          label="이메일 저장"
+          label="동의"
           type="checkbox"
           value="1"
       ></v-checkbox>

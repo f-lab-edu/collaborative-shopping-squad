@@ -2,31 +2,24 @@
 
 
 <script>
-import '../plugins/vuetify.js'
-import '../plugins/webfontloader.js'
-import api from "@/plugins/axios.js";
+import {TOKEN_KEY} from "../../common/variable.js";
+import {defineComponent} from "vue";
 
-export default {
-  data () {
-    return {
-      tab: null,
-      items: [
-        'web', 'shopping', 'videos', 'images', 'news',
-      ],
-      text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+export default defineComponent({
+  methods: {
+    TOKEN_KEY() {
+      return TOKEN_KEY
+    },
+    logout(){
+      localStorage.removeItem(TOKEN_KEY)
+      location.reload();
     }
-  }, methods: {
-      loginPage() {
-        api.get("/member",{}).then((res) => {
-          console.log("---axios Get 성공---- ");
-          this.data = res.data;
-          console.log(res.data);
-        }).catch((res) => {
-          console.error(res);
-        });
-      },
   }
-}
+})
+
+
+
+
 </script>
 
 <style scoped>
@@ -50,9 +43,11 @@ export default {
       <v-btn icon @click="$router.push('/login')">
         <v-icon>mdi-login</v-icon>
       </v-btn>
-      <v-btn icon>
+      <v-btn icon @click="logout()">
         <v-icon>mdi-logout</v-icon>
       </v-btn>
+
+
 
 
       <template v-slot:extension>
