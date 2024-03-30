@@ -19,11 +19,11 @@ public class Collaborator {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column
-    private String code;
+    @Column(nullable = false)
+    private String memberId;
 
     @Column
-    private String name;
+    private int profit;
 
     @CreationTimestamp
     private Date createdAt;

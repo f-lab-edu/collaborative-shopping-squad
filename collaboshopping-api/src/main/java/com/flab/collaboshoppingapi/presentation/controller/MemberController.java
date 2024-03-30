@@ -23,24 +23,15 @@ public class MemberController  {
     private final MemberService memberSevice;
     private final MemberMapper memberMapper;
 
-    @GetMapping("/")
-    public String member() {
-        log.info("good");
-        log.info("hello world");
-        return "member";
-    }
 
     @PostMapping("/join")
-    public void join(@RequestBody @Validated MemberJoinRequest request) throws Exception {
-        log.info("join");
-        log.info(request.toString());
+    public String join(@RequestBody @Validated MemberJoinRequest request) throws Exception {
         memberSevice.join(memberMapper.fromMemberJoinRequest(request));
+        return "complete";
     }
 
     @PostMapping("/login")
     public String login(@RequestBody @Validated MemberLoginRequest request) throws Exception {
-        log.info("login");
-        log.info(request.toString());
 
         return memberSevice.login(memberMapper.fromMemberLoginRequest(request));
 
