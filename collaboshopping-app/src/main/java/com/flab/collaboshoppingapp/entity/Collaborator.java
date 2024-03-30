@@ -19,8 +19,8 @@ public class Collaborator {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column
-    private String member_id;
+    @Column(nullable = false)
+    private String memberId;
 
     @Column
     private int profit;

@@ -2,7 +2,6 @@ package com.flab.collaboshoppingapi.presentation.controller;
 
 import com.flab.collaboshoppingapi.presentation.mapper.CollaboratorMapper;
 import com.flab.collaboshoppingapi.presentation.request.CollaboratorApplyRequest;
-import com.flab.collaboshoppingapi.presentation.request.MemberJoinRequest;
 import com.flab.collaboshoppingapi.service.CollaboratorService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -23,17 +22,8 @@ public class CollaboratorController {
     private final CollaboratorMapper collaboratorMapper;
 
     @PostMapping("/apply")
-    public String apply(@RequestBody @Validated CollaboratorApplyRequest request) throws Exception {
-        log.info("apply");
-        log.info(request.toString());
+    public boolean apply(@RequestBody @Validated CollaboratorApplyRequest request) throws Exception {
         collaboratorSevice.apply(collaboratorMapper.fromCollaboratorApplyRequest(request));
-        return "complete";
+        return true;
     }
-
-
-
-
-
-
-
 }
