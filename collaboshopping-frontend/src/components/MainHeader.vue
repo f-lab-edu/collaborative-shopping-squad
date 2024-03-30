@@ -1,25 +1,21 @@
 <!-- MainHeader.vue -->
 
 
-<script>
+<script setup>
 import {TOKEN_KEY} from "../../common/variable.js";
-import {defineComponent} from "vue";
 
-export default defineComponent({
-  methods: {
-    TOKEN_KEY() {
-      return TOKEN_KEY
-    },
-    logout(){
-      localStorage.removeItem(TOKEN_KEY)
-      location.reload();
-    }
-  }
-})
+const logout = () => {
+  localStorage.removeItem(TOKEN_KEY);
+  location.reload();
+};
 
-
-
-
+export default {
+  setup() {
+    return {
+      logout
+    };
+  },
+};
 </script>
 
 <style scoped>
