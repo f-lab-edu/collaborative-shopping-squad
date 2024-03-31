@@ -26,6 +26,16 @@ const routes = [
         component: () => import(/* webpackChunkName: "about" */ '../views/CollaboratorRegister.vue'),
         meta: { requiresAuth: true }
     },{
+        path: '/tradeRegister',
+        name: 'TradeRegister',
+        component: () => import(/* webpackChunkName: "about" */ '../views/TradeRegister.vue'),
+        meta: { requiresAuth: true }
+    },{
+        path: '/tradeParticipate',
+        name: 'TradeParticipate',
+        component: () => import(/* webpackChunkName: "about" */ '../views/TradeParticipate.vue'),
+        meta: { requiresAuth: true }
+    },{
         path: '/about',
         name: 'About',
         component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')

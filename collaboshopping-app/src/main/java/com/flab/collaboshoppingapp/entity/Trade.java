@@ -19,11 +19,29 @@ public class Trade {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column
-    private String code;
+    @Column(nullable = false)
+    private Long memberId;
+
+    @Column(nullable = false)
+    private Long collaboratorId;
+
+    @Column(nullable = false)
+    private String title;
 
     @Column
-    private String name;
+    private String content;
+
+    @Column
+    private Integer perPrice;
+
+    @Column
+    private Integer minPurchaseCount;
+
+    @Column
+    private String state;
+
+    @Column
+    private String originUrl;
 
     @CreationTimestamp
     private Date createdAt;

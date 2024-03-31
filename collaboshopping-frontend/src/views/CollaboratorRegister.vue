@@ -1,4 +1,4 @@
-<!-- Login.vue -->
+<!-- CollaboratorRegister.vue -->
 <script>
 // @ is an alias to /src
 import '../plugins/vuetify.js'

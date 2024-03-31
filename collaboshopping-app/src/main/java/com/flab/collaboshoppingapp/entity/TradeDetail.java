@@ -19,11 +19,14 @@ public class TradeDetail {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column
-    private String code;
+    @Column(nullable = false)
+    private Long tradeId;
+
+    @Column(nullable = false)
+    private Long memberId;
 
     @Column
-    private String name;
+    private Integer purchaseCount;
 
     @CreationTimestamp
     private Date createdAt;
