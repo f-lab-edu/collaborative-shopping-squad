@@ -1,8 +1,11 @@
 ## Motivation 
+변경사항이 필요한 이유 
 
 ## Modifications   
+변경사항 상세히 나열 
 
 ## Result  
+변경사항이 반영되면 기대할 수 있는 결과 
 
 ## Checklist 
 - [ ] 코어 기능의 경우 테스트를 추가하였는가? 
