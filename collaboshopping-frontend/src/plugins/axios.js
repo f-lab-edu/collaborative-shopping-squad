@@ -16,7 +16,7 @@ const setting = {
     withCredentials: true,
 };
 
-if(!!localStorage.getItem('token')){
+if(!!localStorage.getItem(TOKEN_KEY)){
     setting.headers = {
         ...setting.headers,
         Authorization: `Bearer ${localStorage.getItem(TOKEN_KEY)}`,
