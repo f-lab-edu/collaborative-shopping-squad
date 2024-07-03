@@ -22,7 +22,7 @@ public class Trade {
     @Column(nullable = false)
     private Long memberId;
 
-    @Column(nullable = false)
+    @Column
     private Long collaboratorId;
 
     @Column(nullable = false)

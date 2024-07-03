@@ -3,8 +3,11 @@ package com.flab.collaboshoppingapi.presentation.controller;
 import com.flab.collaboshoppingapi.presentation.mapper.TradeMapper;
 import com.flab.collaboshoppingapi.presentation.request.TradeRegisterRequest;
 import com.flab.collaboshoppingapi.service.TradeService;
+import com.flab.collaboshoppingapi.service.dto.MemberDTO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -23,15 +26,11 @@ public class TradeController {
 
     @PostMapping("/register")
     public boolean register(@RequestBody @Validated TradeRegisterRequest request) throws Exception {
-        tradeService.register(tradeMapper.fromTradeRegisterRequest(request));
+        UsernamePasswordAuthenticationToken user = (UsernamePasswordAuthenticationToken) SecurityContextHolder.getContext().getAuthentication();
+        MemberDTO memberDTO = tradeService.getMember((user.getName()));
+        tradeService.register(tradeMapper.fromTradeRegisterRequest(request),memberDTO.getId());
         return true;
     }
-
-
-
-
-
-
 
 
 }
