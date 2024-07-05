@@ -72,4 +72,9 @@ public class MemberService {
     }
 
 
+    public Member getMember(String mail) {
+        Member member = memberRepository.findByEmail(mail)
+                .orElseThrow(() -> new CustomException("member not found",ErrorCode.MEMBER_NOT_FOUND));
+        return member;
+    }
 }

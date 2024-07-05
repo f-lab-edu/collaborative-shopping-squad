@@ -36,6 +36,9 @@ public class Member implements UserDetails {
     private String pwHash;
 
     @Column
+    private String phone;
+
+    @Column
     private String role;
 
     @CreationTimestamp
