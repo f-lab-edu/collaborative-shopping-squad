@@ -20,7 +20,7 @@ public class Collaborator {
     private Long id;
 
     @Column(nullable = false)
-    private String memberId;
+    private Long memberId;
 
     @Column
     private int profit;

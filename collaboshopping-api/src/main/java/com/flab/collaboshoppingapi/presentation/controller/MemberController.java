@@ -25,9 +25,9 @@ public class MemberController  {
 
 
     @PostMapping("/join")
-    public String join(@RequestBody @Validated MemberJoinRequest request) throws Exception {
+    public boolean join(@RequestBody @Validated MemberJoinRequest request) throws Exception {
         memberSevice.join(memberMapper.fromMemberJoinRequest(request));
-        return "complete";
+        return true;
     }
 
     @PostMapping("/login")
