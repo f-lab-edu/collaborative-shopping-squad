@@ -1,6 +1,4 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import Home from '@/views/Home.vue'
-import HomeView from "@/views/HomeView.vue";
 import Main from "@/views/Main.vue";
 import NotFound from "@/views/NotFound.vue";
 
@@ -35,18 +33,6 @@ const routes = [
         name: 'TradeParticipate',
         component: () => import(/* webpackChunkName: "about" */ '../views/TradeParticipate.vue'),
         meta: { requiresAuth: true }
-    },{
-        path: '/about',
-        name: 'About',
-        component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
-    },{
-        path: '/home',       // 스프링으로 치면 킨트롤러부분같은 느낌이다.
-        name: 'HomeView',
-        component: HomeView
-    },{
-        path: '/sample',       // 스프링으로 치면 킨트롤러부분같은 느낌이다.
-        name: 'Sample',
-        component: () => import(/* webpackChunkName: "about" */ '../views/Sample.vue')
     },{
         path: '/:notFound(.*)*',
         component: NotFound

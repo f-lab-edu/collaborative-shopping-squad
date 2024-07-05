@@ -7,13 +7,27 @@ import MainHeader from "@/components/MainHeader.vue";
 import MainFooter from "@/components/MainFooter.vue";
 import {ref} from 'vue'
 import {useField, useForm} from 'vee-validate'
+import {TOKEN_KEY} from "../../common/variable.js";
+import router from "@/router/index.js";
 
 export default {
   name: 'Join',
   components: {
     MainHeader,
     MainFooter
+  },mounted() {
+    this.loadFn();
+  },
+  methods: {
+    loadFn() {
+      let loginYn = localStorage.getItem(TOKEN_KEY);
+      if(!((!loginYn && typeof loginYn === 'object'))){
+        router.replace({path:'/'});
+      }
+
+    },
   }
+
 }
 </script>
 <script setup>
