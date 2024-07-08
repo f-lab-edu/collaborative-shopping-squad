@@ -1,0 +1,27 @@
+### POST JOIN - 회원가입
+POST http://localhost:8080/api/v1/members/join
+Content-Type: application/json
+
+{
+  "name" : "test",
+  "phone" : "01000000000",
+  "email" : "test@test.com",
+  "password" : "test"
+}
+
+### POST LOGIN - 회원 로그인
+POST http://localhost:8080/api/v1/members/login
+Content-Type: application/json
+
+{
+  "email": "test@test.com",
+  "password": "test"
+}
+
+
+
+### GET SELECT MEMBER LIST - 관리자 회원리스트 조회
+GET http://localhost:8080/api/v1/admins/getMembersList
+Content-Type: application/json
+
+{}

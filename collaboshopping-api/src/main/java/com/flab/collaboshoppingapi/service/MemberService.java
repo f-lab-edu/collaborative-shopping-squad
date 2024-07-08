@@ -8,13 +8,16 @@ import com.flab.collaboshoppingapp.entity.Member;
 import com.flab.collaboshoppingapp.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -26,6 +29,7 @@ public class MemberService {
     private final BCryptPasswordEncoder passwordEncoder;
     private final UserDetailServiceAdapter userDetailServiceAdapter;
     private final JWTUtil jwtUtil;
+    private final ModelMapper modelMapper;
 
     @Transactional
     public Long join(MemberDTO memberDTO) {
@@ -59,6 +63,14 @@ public class MemberService {
         return member;
     }
 
+    private MemberDTO convertEntityToDto(Member member) {
+        MemberDTO memberDto = new MemberDTO();
+        memberDto.setName(member.getName());
+        memberDto.setRole(member.getRole());
+        memberDto.setEmail(member.getEmail());
+        return memberDto;
+    }
+
     private void validateDuplicateEmail(String email) {
         if(memberRepository.existsByEmail(email)){
             throw new CustomException("email duplicated", ErrorCode.EMAIL_DUPLICATION);
@@ -76,5 +88,13 @@ public class MemberService {
         Member member = memberRepository.findByEmail(mail)
                 .orElseThrow(() -> new CustomException("member not found",ErrorCode.MEMBER_NOT_FOUND));
         return member;
+    }
+
+    public List<MemberDTO> getMembersList() {
+        List<Member> memberList = memberRepository.findAll();
+        return memberList.stream()
+                .map(data -> convertEntityToDto(data))
+                .collect(Collectors.toList());
+
     }
 }
