@@ -34,6 +34,10 @@ public class MemberDTO {
         this.role = role;
     }
 
+    public MemberDTO(long id) {
+        this.id = id;
+    }
+
     @Override
     public String toString() {
         return "MemberDTO{" +
