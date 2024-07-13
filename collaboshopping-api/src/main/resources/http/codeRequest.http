@@ -38,3 +38,23 @@ Content-Type: application/json
 {
   "id": 1
 }
+
+### PUT UPDATE MEMBER - 회원정보 수정
+PUT http://localhost:8080/api/v1/members/updateMember
+Content-Type: application/json
+
+{
+  "id": 1,
+  "name": "CHANGE",
+  "phone": "123456789",
+  "password": "1234",
+  "role": "1234"
+}
+
+### DELETE UPDATE MEMBER - 회원정보 삭제
+DELETE http://localhost:8080/api/v1/members/deleteMember
+Content-Type: application/json
+
+{
+  "id": 1
+}
