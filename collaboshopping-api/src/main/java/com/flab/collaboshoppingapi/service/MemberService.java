@@ -63,14 +63,18 @@ public class MemberService {
         member.setEmail(memberDTO.getEmail());
         member.setPwHash(passwordEncoder.encode(memberDTO.getPassword()));
         member.setUuid(UUID.randomUUID().toString().replace("-", ""));
+        member.setPhone(memberDTO.getPhone());
         return member;
     }
 
     private MemberDTO convertEntityToDto(Member member) {
         MemberDTO memberDto = new MemberDTO();
+        memberDto.setId(member.getId());
         memberDto.setName(member.getName());
         memberDto.setRole(member.getRole());
         memberDto.setEmail(member.getEmail());
+        memberDto.setPhone(member.getPhone());
+        memberDto.setPassword(member.getPassword());
         return memberDto;
     }
 
@@ -115,7 +119,6 @@ public class MemberService {
         member.setPwHash(passwordEncoder.encode(memberDTO.getPassword()));
         member.setPhone(memberDTO.getPhone());
         member.setRole(memberDTO.getRole());
-
         return memberRepository.save(member).getId();
     }
 
@@ -141,6 +144,7 @@ public class MemberService {
         addressDto.setCode(data.getCode());
         addressDto.setMemberId(data.getMemberId());
         addressDto.setMainAddressYn(data.getMainAddressYn());
+        addressDto.setSection(data.getSection());
 
         return addressDto;
     }
@@ -149,7 +153,9 @@ public class MemberService {
         Address address = new Address();
         address.setName(addressDTO.getName());
         address.setCode(addressDTO.getCode());
+        address.setMemberId(addressDTO.getMemberId());
         address.setMainAddressYn(addressDTO.getMainAddressYn());
+        address.setSection(addressDTO.getSection());
         return address;
     }
 
@@ -170,6 +176,7 @@ public class MemberService {
         address.setMainAddressYn(addressDTO.getMainAddressYn());
         address.setName(addressDTO.getName());
         address.setCode(addressDTO.getCode());
+        address.setSection(addressDTO.getSection());
         return addressRepository.save(address).getId();
     }
 

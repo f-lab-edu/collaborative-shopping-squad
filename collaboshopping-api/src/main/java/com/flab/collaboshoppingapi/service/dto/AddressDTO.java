@@ -18,6 +18,8 @@ public class AddressDTO {
 
     private String mainAddressYn;
 
+    private String section;
+
     public AddressDTO(long id, String code, String name, String mainAddressYn) {
         this.id = id;
         this.name  = name;
@@ -45,5 +47,24 @@ public class AddressDTO {
         this.name = name;
         this.memberId = memberId;
         this.mainAddressYn = mainAddressYn;
+    }
+
+
+    public AddressDTO(String code, String name, long memberId, String mainAddressYn, String section) {
+        this.code = code;
+        this.name = name;
+        this.memberId = memberId;
+        this.mainAddressYn = mainAddressYn;
+        this.section = section;
+
+    }
+
+    public AddressDTO(long id, String code, String name, long memberId, String mainAddressYn, String section) {
+        this.id = id;
+        this.code = code;
+        this.name = name;
+        this.memberId = memberId;
+        this.mainAddressYn = mainAddressYn;
+        this.section = section;
     }
 }

@@ -10,20 +10,39 @@ import lombok.Setter;
 public class CollaboratorDTO {
 
 
-    private String name;
+    private long id;
 
-    private String address;
+    private long memberId;
 
-    public CollaboratorDTO(String name, String address) {
-        this.name = name;
-        this.address = address;
+    private int profit;
+
+
+    public CollaboratorDTO(long id, long memberId, int profit) {
+        this.id = id;
+        this.memberId = memberId;
+        this.profit = profit;
+    }
+
+    public CollaboratorDTO(long id) {
+        this.id = id;
+    }
+
+    public CollaboratorDTO(long id, int profit) {
+        this.id = id;
+        this.profit = profit;
+    }
+
+    public CollaboratorDTO(int profit, long memberId) {
+        this.profit = profit;
+        this.memberId = memberId;
     }
 
     @Override
     public String toString() {
         return "CollaboratorDTO{" +
-                "name='" + name + '\'' +
-                ", address='" + address + '\'' +
+                "id=" + id +
+                ", memberId=" + memberId +
+                ", profit=" + profit +
                 '}';
     }
 }
