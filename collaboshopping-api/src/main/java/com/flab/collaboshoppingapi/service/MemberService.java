@@ -3,18 +3,21 @@ package com.flab.collaboshoppingapi.service;
 import com.flab.collaboshoppingapi.common.exception.CustomException;
 import com.flab.collaboshoppingapi.common.exception.ErrorCode;
 import com.flab.collaboshoppingapi.infrastructure.util.JWTUtil;
+import com.flab.collaboshoppingapi.service.dto.AddressDTO;
 import com.flab.collaboshoppingapi.service.dto.MemberDTO;
+import com.flab.collaboshoppingapp.entity.Address;
 import com.flab.collaboshoppingapp.entity.Member;
+import com.flab.collaboshoppingapp.repository.AddressRepository;
 import com.flab.collaboshoppingapp.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -29,7 +32,7 @@ public class MemberService {
     private final BCryptPasswordEncoder passwordEncoder;
     private final UserDetailServiceAdapter userDetailServiceAdapter;
     private final JWTUtil jwtUtil;
-    private final ModelMapper modelMapper;
+    private final AddressRepository addressRepository;
 
     @Transactional
     public Long join(MemberDTO memberDTO) {
@@ -121,5 +124,57 @@ public class MemberService {
                 .orElseThrow(() -> new CustomException("member not found",ErrorCode.MEMBER_NOT_FOUND));
         memberRepository.delete(member);
         return memberDTO.getId();
+    }
+
+    public List<AddressDTO> getMemberAddressList(AddressDTO addressDTO) {
+        List<Address> addressList = addressRepository.findAllById(Collections.singleton(addressDTO.getMemberId()));
+        return addressList.stream()
+                .map(data -> convertAddressEntityToDto(data))
+                .collect(Collectors.toList());
+    }
+
+    private AddressDTO convertAddressEntityToDto(Address data) {
+
+        AddressDTO addressDto = new AddressDTO();
+        addressDto.setId(data.getId());
+        addressDto.setName(data.getName());
+        addressDto.setCode(data.getCode());
+        addressDto.setMemberId(data.getMemberId());
+        addressDto.setMainAddressYn(data.getMainAddressYn());
+
+        return addressDto;
+    }
+
+    private Address convertAddressDtoToEntity(AddressDTO addressDTO) {
+        Address address = new Address();
+        address.setName(addressDTO.getName());
+        address.setCode(addressDTO.getCode());
+        address.setMainAddressYn(addressDTO.getMainAddressYn());
+        return address;
+    }
+
+    public AddressDTO getAddress(AddressDTO addressDTO) {
+        Address address = addressRepository.findById(addressDTO.getId())
+                .orElseThrow(() -> new CustomException("",ErrorCode.MEMBER_NOT_FOUND));
+        return convertAddressEntityToDto(address);
+    }
+
+    public long insertAddress(AddressDTO addressDTO) {
+        Address address = convertAddressDtoToEntity(addressDTO);
+        return addressRepository.save(address).getId();
+    }
+
+    public long updateAddress(AddressDTO addressDTO) {
+        Address address = addressRepository.findById(addressDTO.getId())
+                .orElseThrow(() -> new CustomException("member not found",ErrorCode.MEMBER_NOT_FOUND));
+        address.setMainAddressYn(addressDTO.getMainAddressYn());
+        address.setName(addressDTO.getName());
+        address.setCode(addressDTO.getCode());
+        return addressRepository.save(address).getId();
+    }
+
+    public long deleteAddress(AddressDTO addressDTO) {
+        addressRepository.deleteById(addressDTO.getId());
+        return addressDTO.getId();
     }
 }
