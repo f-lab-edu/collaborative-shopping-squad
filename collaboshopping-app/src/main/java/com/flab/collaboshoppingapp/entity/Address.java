@@ -31,6 +31,9 @@ public class Address {
     @Column
     private String mainAddressYn;
 
+    @Column
+    private String section;
+
     @CreationTimestamp
     private Date createdAt;
 

@@ -42,7 +42,7 @@ public class MemberMapper {
     }
 
     public AddressDTO fromAddressUpdateRequest(AddressUpdateRequest request) {
-        return new AddressDTO(request.id(),request.code(),request.name(),request.mainAddressYn());
+        return new AddressDTO(request.id(),request.code(),request.name(),request.memberId(),request.mainAddressYn(),request.section());
 
     }
 
@@ -51,6 +51,6 @@ public class MemberMapper {
     }
 
     public AddressDTO fromAddressInsertRequest(AddressInsertRequest request) {
-        return new AddressDTO(request.code(),request.name(),request.memberId(),request.mainAddressYn());
+        return new AddressDTO(request.code(),request.name(),request.memberId(),request.mainAddressYn(),request.section());
     }
 }
