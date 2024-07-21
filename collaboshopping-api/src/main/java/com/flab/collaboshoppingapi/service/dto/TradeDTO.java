@@ -11,11 +11,19 @@ import lombok.Setter;
 @NoArgsConstructor
 public class TradeDTO {
 
+    private long id;
+
+    private long memberId;
+
+    private long collaboratorId;
+
     private String title;
 
     private String content;
 
     private String originUrl;
+
+    private String section;
 
     private int perPrice;
 
@@ -29,6 +37,31 @@ public class TradeDTO {
         this.perPrice = perPrice;
         this.minPurchaseCount = minPurchaseCount;
     }
+
+    public TradeDTO(long id) {
+        this.id = id;
+    }
+
+
+    public TradeDTO(long id,long memberId, long collaboratorId) {
+        this.id = id;
+        this.memberId = memberId;
+        this.collaboratorId = collaboratorId;
+    }
+
+    public TradeDTO(String section) {
+        this.section = section;
+    }
+
+    public TradeDTO(long id, String title, String content, String originUrl, int minPurchaseCount, int perPrice) {
+        this.id = id;
+        this.title = title;
+        this.content = content;
+        this.originUrl = originUrl;
+        this.perPrice = perPrice;
+        this.minPurchaseCount = minPurchaseCount;
+    }
+
 
     public Trade toEntity() {
         return Trade.builder()

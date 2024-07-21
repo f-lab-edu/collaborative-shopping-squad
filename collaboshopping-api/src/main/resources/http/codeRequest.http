@@ -149,3 +149,82 @@ Content-Type: application/json
 {
   "id": 1
 }
+
+###
+POST http://localhost:8080/api/v1/trades/register
+Content-Type: application/json
+
+{
+  "title": "공동구매합니다.",
+  "content": "에어팟 공동구매할게요",
+  "originUrl": "https://test.com",
+  "perPrice": 150000,
+  "minPurchaseCount": 1
+}
+
+###
+PUT http://localhost:8080/api/v1/trades/collaborateTrade
+Content-Type: application/json
+
+{
+  "id": 1,
+  "collaboratorId": 1
+}
+
+###
+PUT http://localhost:8080/api/v1/trades/updateTrade
+Content-Type: application/json
+
+{
+  "id": 1,
+  "title": "에어팟 공동구매 게시글 수정했습니다",
+  "content": "url 변경합니다",
+  "originUrl": "https://test2.com",
+  "minPurchaseCount": 120000,
+  "perPrice": 1
+}
+
+###
+DELETE http://localhost:8080/api/v1/trades/deleteTrade
+Content-Type: application/json
+
+{
+  "id": 1
+}
+
+###
+GET http://localhost:8080/api/v1/trades/getTradeList
+
+{}
+
+###
+GET http://localhost:8080/api/v1/trades/getMemberTradeList
+Content-Type: application/json
+
+{
+  "memberId": 1
+}
+
+###
+GET http://localhost:8080/api/v1/trades/getCollaboratorTradeList
+Content-Type: application/json
+
+{
+  "collaboratorId": 1
+}
+
+###
+GET http://localhost:8080/api/v1/trades/getSectionTradeList
+Content-Type: application/json
+
+{
+  "section": "중구3구역"
+}
+
+###
+GET http://localhost:8080/api/v1/trades/getTrade
+Content-Type: application/json
+
+{
+  "id": 1
+}
