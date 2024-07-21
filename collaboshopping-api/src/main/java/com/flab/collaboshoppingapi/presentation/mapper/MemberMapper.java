@@ -2,6 +2,7 @@ package com.flab.collaboshoppingapi.presentation.mapper;
 
 import com.flab.collaboshoppingapi.presentation.request.*;
 import com.flab.collaboshoppingapi.presentation.response.MemberLoginResponse;
+import com.flab.collaboshoppingapi.service.dto.AddressDTO;
 import com.flab.collaboshoppingapi.service.dto.MemberDTO;
 import org.springframework.stereotype.Component;
 
@@ -30,5 +31,26 @@ public class MemberMapper {
 
     public MemberDTO fromMemberDeleteRequest(MemberDeleteRequest request) {
         return new MemberDTO(request.id());
+    }
+
+    public AddressDTO fromAddressListSelectrequest(AddressListSelectRequest request) {
+        return new AddressDTO(request.memberId());
+    }
+
+    public AddressDTO fromAddressSelectRequest(AddressSelectRequest request) {
+        return new AddressDTO(request.id(),request.memberId());
+    }
+
+    public AddressDTO fromAddressUpdateRequest(AddressUpdateRequest request) {
+        return new AddressDTO(request.id(),request.code(),request.name(),request.mainAddressYn());
+
+    }
+
+    public AddressDTO fromAddressDeleteRequest(AddressDeleteRequest request) {
+        return new AddressDTO(request.id(),request.memberId());
+    }
+
+    public AddressDTO fromAddressInsertRequest(AddressInsertRequest request) {
+        return new AddressDTO(request.code(),request.name(),request.memberId(),request.mainAddressYn());
     }
 }

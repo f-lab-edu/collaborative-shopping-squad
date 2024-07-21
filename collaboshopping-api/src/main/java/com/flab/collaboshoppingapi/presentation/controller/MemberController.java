@@ -3,6 +3,7 @@ package com.flab.collaboshoppingapi.presentation.controller;
 import com.flab.collaboshoppingapi.presentation.mapper.MemberMapper;
 import com.flab.collaboshoppingapi.presentation.request.*;
 import com.flab.collaboshoppingapi.service.MemberService;
+import com.flab.collaboshoppingapi.service.dto.AddressDTO;
 import com.flab.collaboshoppingapi.service.dto.MemberDTO;
 import com.flab.collaboshoppingapp.entity.Member;
 import lombok.RequiredArgsConstructor;
@@ -10,6 +11,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -57,6 +60,30 @@ public class MemberController  {
         return memberService.deleteMember(memberMapper.fromMemberDeleteRequest(request));
     }
 
+    @GetMapping("/getMemberAddressList")
+    public List<AddressDTO> getMemberAddressList(@RequestBody @Validated AddressListSelectRequest request) {
+        return memberService.getMemberAddressList(memberMapper.fromAddressListSelectrequest(request));
+    }
+
+    @GetMapping("/getAddress")
+    public AddressDTO getAddress(@RequestBody @Validated AddressSelectRequest request){
+        return memberService.getAddress(memberMapper.fromAddressSelectRequest(request));
+    }
+
+    @PostMapping("/insertAddress")
+    public long insertAddress(@RequestBody @Validated AddressInsertRequest request){
+        return memberService.insertAddress(memberMapper.fromAddressInsertRequest(request));
+    }
+
+    @PutMapping("/updateAddress")
+    public long updateAddress(@RequestBody @Validated AddressUpdateRequest request){
+        return memberService.updateAddress(memberMapper.fromAddressUpdateRequest(request));
+    }
+
+    @DeleteMapping("/deleteAddress")
+    public long deleteAddress(@RequestBody @Validated AddressDeleteRequest request){
+        return memberService.deleteAddress(memberMapper.fromAddressDeleteRequest(request));
+    }
 
 
 

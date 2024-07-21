@@ -51,10 +51,52 @@ Content-Type: application/json
   "role": "1234"
 }
 
-### DELETE UPDATE MEMBER - 회원정보 삭제
+### DELETE DELETE MEMBER - 회원정보 삭제
 DELETE http://localhost:8080/api/v1/members/deleteMember
 Content-Type: application/json
 
 {
   "id": 1
 }
+
+###
+GET http://localhost:8080/api/v1/members/getMemberAddressList
+Content-Type: application/json
+
+{
+  "memberId": 1
+}
+
+###
+GET http://localhost:8080/api/v1/members/getAddress
+Content-Type: application/json
+
+{
+  "id": 1
+}
+
+###
+POST http://localhost:8080/api/v1/members/insertAddress
+Content-Type: application/json
+
+{
+  "code": "04334",
+  "name": "서울특별시 강남구 강남대로",
+  "memberId": 1,
+  "mainAddressYn": "Y"
+}
+
+###
+PUT http://localhost:8080/api/v1/members/updateAddress
+Content-Type: application/json
+
+{
+  "id": 1,
+  "code": "04332",
+  "name": "서울특별시 중구",
+  "memberId": 1,
+  "mainAddressYn": "N"
+}
+
+###
+DELETE http://localhost:8080/api/v1/members/deleteAddress
