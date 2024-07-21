@@ -25,6 +25,12 @@ public class Address {
     @Column
     private String name;
 
+    @Column
+    private Long memberId;
+
+    @Column
+    private String mainAddressYn;
+
     @CreationTimestamp
     private Date createdAt;
 
