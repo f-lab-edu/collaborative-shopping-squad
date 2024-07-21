@@ -3,6 +3,7 @@ package com.flab.collaboshoppingapi.presentation.controller;
 import com.flab.collaboshoppingapi.presentation.mapper.MemberMapper;
 import com.flab.collaboshoppingapi.presentation.request.MemberJoinRequest;
 import com.flab.collaboshoppingapi.presentation.request.MemberLoginRequest;
+import com.flab.collaboshoppingapi.presentation.request.MemberSelectRequest;
 import com.flab.collaboshoppingapi.service.MemberService;
 import com.flab.collaboshoppingapi.service.dto.MemberDTO;
 import com.flab.collaboshoppingapp.entity.Member;
@@ -11,9 +12,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -46,12 +44,9 @@ public class MemberController  {
         return member.getId();
     }
 
-
-    //limit-offset 페이징 - limit-where 조건절로 처리가능
-    @GetMapping("/getMembers")
-    public List<MemberDTO> getMemberList() {
-        List<MemberDTO> list = new ArrayList<>();
-        return list;
+    @GetMapping("/getMember")
+    public MemberDTO getMember(@RequestBody @Validated MemberSelectRequest request){
+        return memberService.getMemberInfo(memberMapper.fromMemberSelectRequest(request));
     }
 
 

@@ -97,4 +97,11 @@ public class MemberService {
                 .collect(Collectors.toList());
 
     }
+
+    public MemberDTO getMemberInfo(MemberDTO memberDTO) {
+        Member member = memberRepository.findById(memberDTO.getId())
+                .orElseThrow(() -> new CustomException("member not found",ErrorCode.MEMBER_NOT_FOUND));
+        return convertEntityToDto(member);
+
+    }
 }
