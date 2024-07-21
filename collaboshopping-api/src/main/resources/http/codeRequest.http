@@ -60,6 +60,18 @@ Content-Type: application/json
 }
 
 ###
+POST http://localhost:8080/api/v1/members/insertAddress
+Content-Type: application/json
+
+{
+  "code": "04334",
+  "name": "서울특별시 강남구 강남대로",
+  "memberId": 1,
+  "mainAddressYn": "Y",
+  "section": "강남1구역"
+}
+
+###
 GET http://localhost:8080/api/v1/members/getMemberAddressList
 Content-Type: application/json
 
@@ -75,16 +87,7 @@ Content-Type: application/json
   "id": 1
 }
 
-###
-POST http://localhost:8080/api/v1/members/insertAddress
-Content-Type: application/json
 
-{
-  "code": "04334",
-  "name": "서울특별시 강남구 강남대로",
-  "memberId": 1,
-  "mainAddressYn": "Y"
-}
 
 ###
 PUT http://localhost:8080/api/v1/members/updateAddress
@@ -95,8 +98,54 @@ Content-Type: application/json
   "code": "04332",
   "name": "서울특별시 중구",
   "memberId": 1,
-  "mainAddressYn": "N"
+  "mainAddressYn": "N",
+  "section": "중구3구역"
 }
 
 ###
 DELETE http://localhost:8080/api/v1/members/deleteAddress
+Content-Type: application/json
+
+{
+  "id" : 1
+}
+
+###
+POST http://localhost:8080/api/v1/collaborators/insertCollaborator
+Content-Type: application/json
+
+{
+  "memberId": 1,
+  "profit": 0
+}
+
+###
+PUT http://localhost:8080/api/v1/collaborators/updateCollaborator
+Content-Type: application/json
+
+{
+  "id": 1,
+  "profit": 500
+}
+
+###
+DELETE http://localhost:8080/api/v1/collaborators/deleteCollaborator
+Content-Type: application/json
+
+{
+  "id": 1
+}
+
+###
+GET http://localhost:8080/api/v1/collaborators/getCollaboratorList
+Content-Type: application/json
+
+{}
+
+###
+GET http://localhost:8080/api/v1/collaborators/getCollaborator
+Content-Type: application/json
+
+{
+  "id": 1
+}

@@ -2,6 +2,7 @@ package com.flab.collaboshoppingapp.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.sql.Date;
@@ -23,6 +24,7 @@ public class Collaborator {
     private Long memberId;
 
     @Column
+    @ColumnDefault("0")
     private int profit;
 
     @CreationTimestamp
