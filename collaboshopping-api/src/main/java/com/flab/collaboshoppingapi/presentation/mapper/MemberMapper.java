@@ -1,8 +1,6 @@
 package com.flab.collaboshoppingapi.presentation.mapper;
 
-import com.flab.collaboshoppingapi.presentation.request.MemberJoinRequest;
-import com.flab.collaboshoppingapi.presentation.request.MemberLoginRequest;
-import com.flab.collaboshoppingapi.presentation.request.MemberSelectRequest;
+import com.flab.collaboshoppingapi.presentation.request.*;
 import com.flab.collaboshoppingapi.presentation.response.MemberLoginResponse;
 import com.flab.collaboshoppingapi.service.dto.MemberDTO;
 import org.springframework.stereotype.Component;
@@ -23,6 +21,14 @@ public class MemberMapper {
     }
 
     public MemberDTO fromMemberSelectRequest(MemberSelectRequest request) {
+        return new MemberDTO(request.id());
+    }
+
+    public MemberDTO fromMemberUpdateRequest(MemberUpdateRequest request) {
+        return new MemberDTO(request.id(),request.password(),request.name(),request.phone(),request.role());
+    }
+
+    public MemberDTO fromMemberDeleteRequest(MemberDeleteRequest request) {
         return new MemberDTO(request.id());
     }
 }
