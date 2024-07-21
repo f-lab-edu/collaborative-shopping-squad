@@ -1,9 +1,7 @@
 package com.flab.collaboshoppingapi.presentation.controller;
 
 import com.flab.collaboshoppingapi.presentation.mapper.MemberMapper;
-import com.flab.collaboshoppingapi.presentation.request.MemberJoinRequest;
-import com.flab.collaboshoppingapi.presentation.request.MemberLoginRequest;
-import com.flab.collaboshoppingapi.presentation.request.MemberSelectRequest;
+import com.flab.collaboshoppingapi.presentation.request.*;
 import com.flab.collaboshoppingapi.service.MemberService;
 import com.flab.collaboshoppingapi.service.dto.MemberDTO;
 import com.flab.collaboshoppingapp.entity.Member;
@@ -47,6 +45,16 @@ public class MemberController  {
     @GetMapping("/getMember")
     public MemberDTO getMember(@RequestBody @Validated MemberSelectRequest request){
         return memberService.getMemberInfo(memberMapper.fromMemberSelectRequest(request));
+    }
+
+    @PutMapping("/updateMember")
+    public long updateMember(@RequestBody @Validated MemberUpdateRequest request){
+        return memberService.updateMember(memberMapper.fromMemberUpdateRequest(request));
+    }
+
+    @DeleteMapping("/deleteMember")
+    public long deleteMember(@RequestBody @Validated MemberDeleteRequest request){
+        return memberService.deleteMember(memberMapper.fromMemberDeleteRequest(request));
     }
 
 

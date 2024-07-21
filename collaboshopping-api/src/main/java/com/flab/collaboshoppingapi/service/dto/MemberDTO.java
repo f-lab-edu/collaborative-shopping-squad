@@ -38,6 +38,14 @@ public class MemberDTO {
         this.id = id;
     }
 
+    public MemberDTO(long id, String password, String name, String phone, String role) {
+        this.id = id;
+        this.password = password;
+        this.name = name;
+        this.phone = phone;
+        this.role = role;
+    }
+
     @Override
     public String toString() {
         return "MemberDTO{" +

@@ -104,4 +104,22 @@ public class MemberService {
         return convertEntityToDto(member);
 
     }
+
+    public long updateMember(MemberDTO memberDTO) {
+        Member member = memberRepository.findById(memberDTO.getId())
+                .orElseThrow(() -> new CustomException("member not found",ErrorCode.MEMBER_NOT_FOUND));
+        member.setName(memberDTO.getName());
+        member.setPwHash(passwordEncoder.encode(memberDTO.getPassword()));
+        member.setPhone(memberDTO.getPhone());
+        member.setRole(memberDTO.getRole());
+
+        return memberRepository.save(member).getId();
+    }
+
+    public long deleteMember(MemberDTO memberDTO) {
+        Member member = memberRepository.findById(memberDTO.getId())
+                .orElseThrow(() -> new CustomException("member not found",ErrorCode.MEMBER_NOT_FOUND));
+        memberRepository.delete(member);
+        return memberDTO.getId();
+    }
 }
