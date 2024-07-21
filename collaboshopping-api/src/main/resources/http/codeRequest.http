@@ -18,6 +18,11 @@ Content-Type: application/json
   "password": "test"
 }
 
+> {%
+ client.global.set("Authorization", "Bearer "+response.body.accessToken);
+ client.log("Auth Token : "+client.global.get("Authorization"));
+ %}
+
 
 
 ### GET SELECT MEMBER LIST - 관리자 회원리스트 조회
@@ -25,3 +30,11 @@ GET http://localhost:8080/api/v1/admins/getMembersList
 Content-Type: application/json
 
 {}
+
+### GET SELECT MEMBER - 회원정보 조회
+GET http://localhost:8080/api/v1/members/getMember
+Content-Type: application/json
+
+{
+  "id": 1
+}
