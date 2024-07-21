@@ -34,6 +34,16 @@ const routes = [
         component: () => import(/* webpackChunkName: "about" */ '../views/TradeParticipate.vue'),
         meta: { requiresAuth: true }
     },{
+        path: '/adminUserInfo',
+        name: 'AdminUserInfo',
+        component: () => import(/* webpackChunkName: "about" */ '../views/AdminUserInfo.vue'),
+        meta: { requiresAuth: true }
+    },{
+        path: '/userDetail/:id',
+        name: 'UserDetail',
+        component: () => import(/* webpackChunkName: "about" */ '../views/UserDetail.vue'),
+        meta: { requiresAuth: true }
+    },{
         path: '/:notFound(.*)*',
         component: NotFound
     }

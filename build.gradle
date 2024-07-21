@@ -32,6 +32,9 @@ subprojects {
 
         implementation "org.springframework.boot:spring-boot-starter-logging"
 
+        // model mapper
+        implementation "org.modelmapper:modelmapper"
+
 
         // 스프링 시큐리티
         implementation 'org.springframework.boot:spring-boot-starter-security'
